@@ -10,10 +10,15 @@ def home():
     return render_template("home.html")
 
 
-@views.route('/add')
+@views.route('/browse')
 @login_required
-def add_pet():
-    return render_template("add_pet.html")
+def browse_pets():
+    return render_template("browse_pets.html")
+
+@views.route('/how')
+@login_required
+def how_it_works():
+    return render_template("how_it_works.html")
 
 
 
