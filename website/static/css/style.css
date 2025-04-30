@@ -1,0 +1,20 @@
+:root {
+    --background-color: #fff9f2;
+    --text-color: #412d19;
+    --accent-color: #c5cab4;
+    --nav-color: #fdf9f4;
+    --footer-color: #41443f;
+    --another-color: #ebe9e5;
+  }
+
+  body{
+    background-color: var(--background-color);
+  }
+  .navbar{
+    background-color: var(--nav-color) !important;
+
+  }
+
+  .custom-nav-link{
+    color: var(--text-color) !important;
+  }
