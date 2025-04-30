@@ -1,85 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Home{% endblock %}</title>
+    <!-- CSS STYLING -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <!-- Bootstrap 5.3.5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7"
+      crossorigin="anonymous"
+    />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}Home{% endblock %}</title>
-  <!-- CSS STYLING -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-  <!-- Bootstrap 5.3.5 CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
-</head>
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">🐾 PetPalace</a>
+        <!-- nav bar toggler -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarContent"
+          aria-controls="navbarContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-<body>
-  <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">🐾 PetPalace</a>
-      <!-- nav bar toggler -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
-        aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+        <div class="collapse navbar-collapse" id="navbarContent">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link" href="{{ url_for('views.home') }}"
+              >Home</a
+            >
+            {% if user.is_authenticated %}
 
-      <div class="collapse navbar-collapse" id="navbarContent">
-        <div class="navbar-nav ">
-          <a class="nav-item nav-link" href="{{ url_for('views.home') }}">Home</a>
-          {% if user.is_authenticated %}
-          
-          <a class="nav-item nav-link" href="{{ url_for('views.browse_pets') }}">Browse Pets</a>
-          <a class="nav-item nav-link" href="{{ url_for('views.how_it_works') }}">How It works</a>
-          <a class="nav-item nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
-          {% else %}
-          {% endif %}
-          
+            <a
+              class="nav-item nav-link"
+              href="{{ url_for('views.browse_pets') }}"
+              >Browse Pets</a
+            >
+            <a
+              class="nav-item nav-link"
+              href="{{ url_for('views.how_it_works') }}"
+              >How It works</a
+            >
+            <a class="nav-item nav-link" href="{{ url_for('auth.logout') }}"
+              >Logout</a
+            >
+            {% else %} {% endif %}
+          </div>
+          <!-- The following div will push the Sign Up button to the right -->
+          <div class="navbar-nav ms-auto">
+            {% if not current_user.is_authenticated %}
+            <a href="{{ url_for('auth.sign_up') }}">
+              <button type="button" class="btn btn-outline-light mx-2">
+                Sign Up
+              </button>
+            </a>
+            {% endif %}
+          </div>
         </div>
-        <!-- The following div will push the Sign Up button to the right -->
-        <div class="navbar-nav ms-auto">
-          {% if not current_user.is_authenticated %}
-              <a href="{{ url_for('auth.sign_up') }}">
-                  <button type="button" class="btn btn-outline-light mx-2">Sign Up</button>
-              </a>
-          {% endif %}
       </div>
+    </nav>
 
-      </div>
+    <!-- alert message -->
+    {% with messages= get_flashed_messages(with_categories =true)%} {% if
+    messages%} {% for category, message in messages%} {% if category ==
+    'error'%}
+    <div class="alert alert-danger alter-dismissable fade show" role="alert">
+      {{message}}
+      <button
+        type="button"
+        class="btn-close float-end"
+        data-bs-dismiss="alert"
+        aria-label="close"
+      ></button>
     </div>
-  </nav>
+    {% else %}
+    <div class="alert alert-success alter-dismissable fade show" role="alert">
+      {{message}}
+      <button
+        type="button"
+        class="btn-close float-end"
+        data-bs-dismiss="alert"
+        aria-label="close"
+      ></button>
+    </div>
+    {% endif %} {% endfor %} {% endif %} {% endwith %}
+    <!-- Page Content -->
+    <div class="container mt-4">
+      {% block content %}
 
-  <!-- alert message -->
-  {% with messages= get_flashed_messages(with_categories =true)%}
-  {% if messages%}
-  {% for category, message in messages%}
-  {% if category == 'error'%}
-  <div class="alert alert-danger alter-dismissable fade show" role="alert">
-    {{message}}
-    <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="close">
-    </button>
-  </div>
-  {% else %}
-  <div class="alert alert-success alter-dismissable fade show" role="alert">
-    {{message}}
-    <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="close">
-    </button>
-  </div>
-  {% endif %}
-  {% endfor %}
-  {% endif %}
-  {% endwith %}
-  <!-- Page Content -->
-  <div class="container mt-4">
-    {% block content %}{% endblock %}
-  </div>
+      <footer class="footer">
+        <div class="overlap-group">
+          <div class="rectangle"></div>
 
+          <p class="BONDLY-nile">
+            BONDLY
+            <br /><br />
+            Nile University of Nigeria,
+            <br />
+            FCT, Abuja
+            <br /><br />
+            Phone: +234 555 555 5555
+            <br /><br />
+            Email: bondly@example.com
+          </p>
 
-  <!-- BOOTSTRAP 5.3.5 BUNDLE WITH POPPER -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
-    crossorigin="anonymous"></script>
+          <div class="useful-links-home">
+            Useful Links
+            <br /><br />
+            Home
+            <br /><br />
+            About Us
+            <br /><br />
+            Services
+          </div>
 
+          <p class="our-services-pet">
+            <span class="text-wrapper">
+              Our Services
+              <br /><br />
+              Pet Adoption
+              <br /><br />
+              Pet Training
+            </span>
+            <span class="span"><br /></span>
+          </p>
 
-</body>
+          <p class="our-newsletter">
+            Our Newsletter
+            <br /><br />
+            Subscribe to our newsletter and receive updates about the lovely
+            critters and events showcasing them!
+          </p>
 
+          <div class="copyright-bondly-all">
+            © Copyright   Bondly  All Rights Reserved
+          </div>
+
+          <div class="rectangle-2"></div>
+
+          <div class="rectangle-3"></div>
+
+          <div class="subscribe">
+            <br />
+            Subscribe
+          </div>
+
+          <div class="SC-icons">
+            <div class="linked-in">
+              <img
+                src="..\static\icons\linkedin.svg"
+                alt="LinkedIn Icon"
+                class="icon-instance-node"
+              />
+            </div>
+
+            <div class="x">
+              <img
+                src="..\static\icons\twitter-x.svg"
+                alt="Twitter Icon"
+                class="icon-instance-node"
+              />
+            </div>
+
+            <div class="instagram">
+              <img
+                src="..\static\icons\instagram.svg"
+                alt="Instagram Icon"
+                class="icon-instance-node"
+              />
+            </div>
+
+            <div class="facebook">
+              <img
+                src="..\static\icons\facebook.svg"
+                alt="Facebook Icon"
+                class="icon-instance-node"
+              />
+            </div>
+          </div>
+        </div>
+      </footer>
+      {% endblock %}
+    </div>
+
+    <!-- BOOTSTRAP 5.3.5 BUNDLE WITH POPPER -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
