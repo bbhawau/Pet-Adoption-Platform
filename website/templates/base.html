@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,7 +30,7 @@
         aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-
+      
       <div class="collapse navbar-collapse" id="navbarContent">
         <div class="navbar-nav ">
           <a class="nav-item nav-link custom-nav-link {% if request.path == url_for('views.home') %}active{% endif %}" href="{{ url_for('views.home') }}">Home</a>
@@ -57,38 +56,88 @@
     </div>
   </nav>
 
-  <!-- alert message -->
-  {% with messages= get_flashed_messages(with_categories =true)%}
-  {% if messages%}
-  {% for category, message in messages%}
-  {% if category == 'error'%}
-  <div class="alert alert-danger alter-dismissable fade show" role="alert">
-    {{message}}
-    <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="close">
-    </button>
-  </div>
-  {% else %}
-  <div class="alert alert-success alter-dismissable fade show" role="alert">
-    {{message}}
-    <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="close">
-    </button>
-  </div>
-  {% endif %}
-  {% endfor %}
-  {% endif %}
-  {% endwith %}
-  <!-- Page Content -->
+    <!-- alert message -->
+    {% with messages= get_flashed_messages(with_categories =true)%} {% if
+    messages%} {% for category, message in messages%} {% if category ==
+    'error'%}
+    <div class="alert alert-danger alter-dismissable fade show" role="alert">
+      {{message}}
+      <button
+        type="button"
+        class="btn-close float-end"
+        data-bs-dismiss="alert"
+        aria-label="close"
+      ></button>
+    </div>
+    {% else %}
+    <div class="alert alert-success alter-dismissable fade show" role="alert">
+      {{message}}
+      <button
+        type="button"
+        class="btn-close float-end"
+        data-bs-dismiss="alert"
+        aria-label="close"
+      ></button>
+    </div>
+    {% endif %} {% endfor %} {% endif %} {% endwith %}
+
+      <!-- Page Content -->
   <div class="container mt-4">
     {% block content %}{% endblock %}
   </div>
+  <!--footer-->
+  <footer class="footer">
+        <div class="footer-container">
+          <!--right side-->
+          <div class="footer-section">
+            <h4>BONDLY</h4>
+            <p>Nile University of Nigeria,<br />FCT, Abuja</p>
+            <p>Phone: +234 555 555 5555</p>
+            <p>Email: bondly@example.com</p>
+            <div class="social-icons">
+              <a href="#"><img src="../static/icons/facebook.svg" alt="Facebook Icon" /></a>
+              <a href="#"><img src="../static/iconsinstagram.svg" alt="Instagram Icon" /></a>
+              <a href="#"><img src="../static/iconstwitter-x.svg" alt="Twitter Icon" /></a>
+              <a href="#"><img src="../static/iconslinkedin.svg" alt="LinkedIn Icon" /></a>
+            </div>
+          </div>
 
+          <!--centre-->
+          <div class="footer-section">
+            <h4>Useful Links</h4>
+            <a href="#">Home</a>
+            <a href="#">About Us</a>
+            <a href="#">Services</a>
+          </div>
 
-  <!-- BOOTSTRAP 5.3.5 BUNDLE WITH POPPER -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
-    crossorigin="anonymous"></script>
+          <!--right side-->
+          <div class="footer-section">
+            <h4>Our Services</h4>
+            <a href="#">Pet Adoption</a>
+            <a href="#">Pet Training</a>
+          </div>
 
+          <!--newsletter-->
+          <div class="footer-section">
+            <h4>Our Newsletter</h4>
+            <p>
+              Subscribe to our newsletter and receive updates about the lovely
+              critters and events showcasing them!
+            </p>
+            <form class="newsletter-form">
+              <input type="email" placeholder="Enter your email" required />
+              <button type="submit">Subscribe</button>
+            </form>
+          </div>
+        </div>
 
-</body>
-
+        <div class="footer-bottom">© Copyright Bondly. All Rights Reserved</div>
+      </footer>
+    <!-- BOOTSTRAP 5.3.5 BUNDLE WITH POPPER -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
