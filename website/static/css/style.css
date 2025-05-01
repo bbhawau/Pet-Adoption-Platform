@@ -1,7 +1,7 @@
 :root {
     --sand-color: #fff9f2;
     --text-color: #442d17;
-    --accent-color: #c5cab4;
+    --accent-color: #919973;
     --white-color: #ffffff;
     --footer-color: #41443f;
     --another-color: #ebe9e5;
@@ -12,6 +12,7 @@
     font-family: "Libre Baskerville", serif !important; 
     font-weight: 400 !important;
     font-style: normal !important;
+    
   }
   .navbar{
     background-color: var(--white-color) !important;
@@ -41,3 +42,46 @@
     color: var(--white-color) !important;
     border-radius: 5px;
   }
+
+/* browse pets styling */
+.browse-pets-container h2{
+    color: var(--accent-color);
+}
+.browse-pets-container .card {
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+ 
+  }
+  
+  .browse-pets-container .card img {
+    height: 150px;
+    object-fit: cover;
+  }
+  
+  .browse-pets-container .card-body {
+    height: 100px;
+    overflow: hidden;
+    color: var(--text-color);
+  }
+
+  .search-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    border-radius: 5rem;
+    background-color: transparent;
+    border: 1px solid var(--text-color);
+  }
+  
+  .search-input {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none;
+    background-color: transparent !important;
+
+  }
+  .search-input:focus {
+    box-shadow: none !important;
+    outline: none !important;
+  }
+  
