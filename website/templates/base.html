@@ -99,98 +99,60 @@
     <!-- Page Content -->
     <div class="container mt-4">
       {% block content %}
+      <div class="main-content"></div>
 
       <footer class="footer">
-        <div class="overlap-group">
-          <div class="rectangle"></div>
-
-          <p class="BONDLY-nile">
-            BONDLY
-            <br /><br />
-            Nile University of Nigeria,
-            <br />
-            FCT, Abuja
-            <br /><br />
-            Phone: +234 555 555 5555
-            <br /><br />
-            Email: bondly@example.com
-          </p>
-
-          <div class="useful-links-home">
-            Useful Links
-            <br /><br />
-            Home
-            <br /><br />
-            About Us
-            <br /><br />
-            Services
+        <div class="footer-container">
+          <div class="footer-section">
+            <h4>BONDLY</h4>
+            <p>Nile University of Nigeria,<br />FCT, Abuja</p>
+            <p>Phone: +234 555 555 5555</p>
+            <p>Email: bondly@example.com</p>
+            <div class="social-icons">
+              <a href="#"><img src="facebook.svg" alt="Facebook Icon" /></a>
+              <a href="#"><img src="instagram.svg" alt="Instagram Icon" /></a>
+              <a href="#"
+                ><img
+                  src="twitter-x.svg"
+                  alt="Twitter Icon"
+                  class="icon-instance-node"
+              /></a>
+              <a href="#"
+                ><img
+                  src="linkedin.svg"
+                  alt="LinkedIn Icon"
+                  class="icon-instance-node"
+              /></a>
+            </div>
           </div>
 
-          <p class="our-services-pet">
-            <span class="text-wrapper">
-              Our Services
-              <br /><br />
-              Pet Adoption
-              <br /><br />
-              Pet Training
-            </span>
-            <span class="span"><br /></span>
-          </p>
-
-          <p class="our-newsletter">
-            Our Newsletter
-            <br /><br />
-            Subscribe to our newsletter and receive updates about the lovely
-            critters and events showcasing them!
-          </p>
-
-          <div class="copyright-bondly-all">
-            © Copyright   Bondly  All Rights Reserved
+          <div class="footer-section">
+            <h4>Useful Links</h4>
+            <a href="#">Home</a>
+            <a href="#">About Us</a>
+            <a href="#">Services</a>
           </div>
 
-          <div class="rectangle-2"></div>
-
-          <div class="rectangle-3"></div>
-
-          <div class="subscribe">
-            <br />
-            Subscribe
+          <div class="footer-section">
+            <h4>Our Services</h4>
+            <a href="#">Pet Adoption</a>
+            <a href="#">Pet Training</a>
           </div>
 
-          <div class="SC-icons">
-            <div class="linked-in">
-              <img
-                src="..\static\icons\linkedin.svg"
-                alt="LinkedIn Icon"
-                class="icon-instance-node"
-              />
-            </div>
-
-            <div class="x">
-              <img
-                src="..\static\icons\twitter-x.svg"
-                alt="Twitter Icon"
-                class="icon-instance-node"
-              />
-            </div>
-
-            <div class="instagram">
-              <img
-                src="..\static\icons\instagram.svg"
-                alt="Instagram Icon"
-                class="icon-instance-node"
-              />
-            </div>
-
-            <div class="facebook">
-              <img
-                src="..\static\icons\facebook.svg"
-                alt="Facebook Icon"
-                class="icon-instance-node"
-              />
-            </div>
+          <div class="footer-section">
+            <h4>Our Newsletter</h4>
+            <p>
+              Subscribe to our newsletter and receive updates about the lovely
+              critters and events showcasing them!
+            </p>
+            <form class="newsletter-form">
+              <input type="email" placeholder="Enter your email" required />
+              <button type="submit">Subscribe</button>
+            </form>
           </div>
         </div>
+
+        <div class="footer-bottom">© Copyright Bondly. All Rights Reserved</div>
       </footer>
       {% endblock %}
     </div>
