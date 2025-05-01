@@ -82,34 +82,30 @@
     {% endif %} {% endfor %} {% endif %} {% endwith %}
     <!-- Page Content -->
     <div class="container mt-4">
-      {% block content %}
-      <div class="main-content"></div>
+      {% endif %} {% endfor %} {% endif %} {% endwith %}
 
-      <footer class="footer">
+      <!-- Page Content -->
+  <div class="container mt-4">
+    {% block content %}{% endblock %}
+  </div>
+  <!--footer-->
+  <footer class="footer">
         <div class="footer-container">
+          <!--right side-->
           <div class="footer-section">
             <h4>BONDLY</h4>
             <p>Nile University of Nigeria,<br />FCT, Abuja</p>
             <p>Phone: +234 555 555 5555</p>
             <p>Email: bondly@example.com</p>
             <div class="social-icons">
-              <a href="#"><img src="facebook.svg" alt="Facebook Icon" /></a>
-              <a href="#"><img src="instagram.svg" alt="Instagram Icon" /></a>
-              <a href="#"
-                ><img
-                  src="twitter-x.svg"
-                  alt="Twitter Icon"
-                  class="icon-instance-node"
-              /></a>
-              <a href="#"
-                ><img
-                  src="linkedin.svg"
-                  alt="LinkedIn Icon"
-                  class="icon-instance-node"
-              /></a>
+              <a href="#"><img src="../static/icons/facebook.svg" alt="Facebook Icon" /></a>
+              <a href="#"><img src="../static/iconsinstagram.svg" alt="Instagram Icon" /></a>
+              <a href="#"><img src="../static/iconstwitter-x.svg" alt="Twitter Icon" /></a>
+              <a href="#"><img src="../static/iconslinkedin.svg" alt="LinkedIn Icon" /></a>
             </div>
           </div>
 
+          <!--centre-->
           <div class="footer-section">
             <h4>Useful Links</h4>
             <a href="#">Home</a>
@@ -117,12 +113,14 @@
             <a href="#">Services</a>
           </div>
 
+          <!--right side-->
           <div class="footer-section">
             <h4>Our Services</h4>
             <a href="#">Pet Adoption</a>
             <a href="#">Pet Training</a>
           </div>
 
+          <!--newsletter-->
           <div class="footer-section">
             <h4>Our Newsletter</h4>
             <p>
@@ -138,7 +136,6 @@
 
         <div class="footer-bottom">© Copyright Bondly. All Rights Reserved</div>
       </footer>
-      {% endblock %}
     </div>
 
     <!-- BOOTSTRAP 5.3.5 BUNDLE WITH POPPER -->
