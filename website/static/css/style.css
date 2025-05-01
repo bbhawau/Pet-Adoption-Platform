@@ -1,0 +1,43 @@
+:root {
+    --sand-color: #fff9f2;
+    --text-color: #442d17;
+    --accent-color: #c5cab4;
+    --white-color: #ffffff;
+    --footer-color: #41443f;
+    --another-color: #ebe9e5;
+  }
+
+  body{
+    background-color: var(--sand-color)  !important;
+    font-family: "Libre Baskerville", serif !important; 
+    font-weight: 400 !important;
+    font-style: normal !important;
+  }
+  .navbar{
+    background-color: var(--white-color) !important;
+
+  }
+  .navbar-logo-container {
+    height: 50px; 
+    width: 150px; 
+    display: flex;
+    align-items: center; 
+  }
+  
+  .navbar-logo {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    
+  }
+  
+
+  .custom-nav-link{
+    color: var(--text-color) !important;
+  }
+
+  .nav-item.nav-link.active{
+    background-color: var(--accent-color);
+    color: var(--white-color) !important;
+    border-radius: 5px;
+  }
