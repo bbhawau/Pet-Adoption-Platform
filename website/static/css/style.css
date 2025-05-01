@@ -42,10 +42,7 @@ body {
 
 /* footer */
 
-footer.footer {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+.footer {
   background-color: #2b2b2b;
   color: white;
   padding: 2rem 1rem;
