@@ -13,7 +13,7 @@
 <h2>Need a new friend? You've come to the right place</h2>
   <div class="container mt-4">
     {% for group, animals in animal_groups.items() %}
-      <h3 class="mb-3">{{ group }}</h3>
+      <h3 class="mb-3 group">{{ group }}</h3>
       <div class="row flex-nowrap overflow-auto gap-3 mb-5 d-sm-flex d-md-flex d-lg-flex">
         {% for animal in animals %}
         <div class="col-8 col-sm-6 col-md-4 col-lg-3 col-xl-2 flex-shrink-0">
@@ -25,7 +25,7 @@
                 <p class="card-breed mb-1 text-muted">Breed: {{ animal.breed }}</p>
                 <p class="card-age mb-2 text-muted">Age: {{ animal.age }} years old</p>
               </div>
-              <a href="{{ url_for('views.adopt', animal_id=animal.id) }}" class="btn btn-primary btn-sm mt-auto">Adopt</a>
+              <a href="{{ url_for('views.adopt', animal_id=animal.id) }}" class="btn btn-primary btn-sm mt-auto adopt-btn">Adopt</a>
             </div>
           </div>
         </div>
