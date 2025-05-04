@@ -1,7 +1,7 @@
 
 :root {
   --sand-color: #f8e1c6;
-  --text-color: #442d17;
+  --text-color: #a06835;
   --accent-color: #c1caa1;
   --white-color: #ffffff;
   --footer-color: #41443f;
@@ -80,6 +80,9 @@ body {
   border: 2px solid var(--accent-color);
   color: var(--white-color);
   background-color: var(--accent-color);
+ }
+ .user-icon{
+  color: var(--text-color) !important;
  }
 /* browse pets styling */
 .browse-pets-container h2 {
