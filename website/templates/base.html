@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}Home{% endblock %}</title>
-    <!-- Bootstrap 5.3.5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+  <!-- Bootstrap 5.3.5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
-  <!-- CSS STYLING -->
+      <!-- CSS STYLING -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <!-- Google font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,24 +17,39 @@
     rel="stylesheet">
 </head>
 
-<body>
-  <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-lg ">
-    <div class="container-fluid">
-      <!-- Logo -->
-      <div class="navbar-logo-container">
-        <img src="{{ url_for('static', filename='images/Bondly_logo.png') }}" alt="Bondly Logo" class="navbar-logo">
-      </div>
-      <!-- nav bar toggler -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
-        aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      
-      <div class="collapse navbar-collapse" id="navbarContent">
-        <div class="navbar-nav ">
-          <a class="nav-item nav-link custom-nav-link {% if request.path == url_for('views.home') %}active{% endif %}" href="{{ url_for('views.home') }}">Home</a>
-          {% if user.is_authenticated %}
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <!-- Logo -->
+        <div class="navbar-logo-container">
+          <img
+            src="{{ url_for('static', filename='images/Bondly_logo.png') }}"
+            alt="Bondly Logo"
+            class="navbar-logo"
+          />
+        </div>
+        <!-- nav bar toggler -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarContent"
+          aria-controls="navbarContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarContent">
+          <div class="navbar-nav">
+            <a
+              class="nav-item nav-link custom-nav-link {% if request.path == url_for('views.home') %}active{% endif %}"
+              href="{{ url_for('views.home') }}"
+              >Home</a
+            >
+            {% if user.is_authenticated %}
 
           <a class="nav-item nav-link custom-nav-link {% if request.path == url_for('views.browse_pets') %}active{% endif %}" href="{{ url_for('views.browse_pets') }}">Browse Pets</a>
           <a class="nav-item nav-link custom-nav-link {% if request.path == url_for('views.how_it_works') %}active{% endif %}" href="{{ url_for('views.how_it_works') }}">How It works</a>
@@ -44,10 +59,10 @@
 
         </div>
         <!-- The following div will push the Sign Up button to the right -->
-        <div class="navbar-nav ms-auto">
+        <div class="navbar-nav ms-auto ">
           {% if not current_user.is_authenticated %}
           <a href="{{ url_for('auth.sign_up') }}">
-            <button type="button" class="btn btn-outline-light mx-2">Sign Up</button>
+            <button type="button" class="btn btn-outline-light mx-2 sign-up">Sign Up</button>
           </a>
           {% endif %}
         </div>
@@ -80,59 +95,65 @@
       ></button>
     </div>
     {% endif %} {% endfor %} {% endif %} {% endwith %}
-
-      <!-- Page Content -->
-  <div class="container mt-4">
-    {% block content %}{% endblock %}
-  </div>
-  <!--footer-->
-  <footer class="footer">
-        <div class="footer-container">
-          <!--right side-->
-          <div class="footer-section">
-            <h4>BONDLY</h4>
-            <p>Nile University of Nigeria,<br />FCT, Abuja</p>
-            <p>Phone: +234 555 555 5555</p>
-            <p>Email: bondly@example.com</p>
-            <div class="social-icons">
-              <a href="#"><img src="../static/icons/facebook.svg" alt="Facebook Icon" /></a>
-              <a href="#"><img src="../static/iconsinstagram.svg" alt="Instagram Icon" /></a>
-              <a href="#"><img src="../static/iconstwitter-x.svg" alt="Twitter Icon" /></a>
-              <a href="#"><img src="../static/iconslinkedin.svg" alt="LinkedIn Icon" /></a>
-            </div>
-          </div>
-
-          <!--centre-->
-          <div class="footer-section">
-            <h4>Useful Links</h4>
-            <a href="#">Home</a>
-            <a href="#">About Us</a>
-            <a href="#">Services</a>
-          </div>
-
-          <!--right side-->
-          <div class="footer-section">
-            <h4>Our Services</h4>
-            <a href="#">Pet Adoption</a>
-            <a href="#">Pet Training</a>
-          </div>
-
-          <!--newsletter-->
-          <div class="footer-section">
-            <h4>Our Newsletter</h4>
-            <p>
-              Subscribe to our newsletter and receive updates about the lovely
-              critters and events showcasing them!
-            </p>
-            <form class="newsletter-form">
-              <input type="email" placeholder="Enter your email" required />
-              <button type="submit">Subscribe</button>
-            </form>
+    <!-- Page Content -->
+    <div class="container mt-4">{% block content %}{% endblock %}</div>
+    <!--footer-->
+    <footer class="footer">
+      <div class="footer-container">
+        <!--right side-->
+        <div class="footer-section">
+          <h4>BONDLY</h4>
+          <p>Nile University of Nigeria,<br />FCT, Abuja</p>
+          <p>Phone: +234 555 555 5555</p>
+          <p>Email: bondly@example.com</p>
+          <div class="social-icons">
+            <a href="#"
+              ><img src="../static/icons/facebook.svg" alt="Facebook Icon"
+            /></a>
+            <a href="#"
+              ><img src="../static/icons/instagram.svg" alt="Instagram Icon"
+            /></a>
+            <a href="#"
+              ><img src="../static/icons/twitter-x.svg" alt="Twitter Icon"
+            /></a>
+            <a href="#"
+              ><img src="../static/icons/linkedin.svg" alt="LinkedIn Icon"
+            /></a>
           </div>
         </div>
 
-        <div class="footer-bottom">© Copyright Bondly. All Rights Reserved</div>
-      </footer>
+        <!--centre-->
+        <div class="footer-section">
+          <h4>Useful Links</h4>
+          <a href="#">Home</a>
+          <a href="#">About Us</a>
+          <a href="#">Services</a>
+        </div>
+
+        <!--right side-->
+        <div class="footer-section">
+          <h4>Our Services</h4>
+          <a href="#">Pet Adoption</a>
+          <a href="#">Pet Training</a>
+        </div>
+
+        <!--newsletter-->
+        <div class="footer-section">
+          <h4>Our Newsletter</h4>
+          <p>
+            Subscribe to our newsletter and receive updates about the lovely
+            critters and events showcasing them!
+          </p>
+          <form class="newsletter-form">
+            <input type="email" placeholder="Enter your email" required />
+            <button type="submit">Subscribe</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom">© Copyright Bondly. All Rights Reserved</div>
+    </footer>
+
     <!-- BOOTSTRAP 5.3.5 BUNDLE WITH POPPER -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
