@@ -1,7 +1,6 @@
-
 :root {
   --sand-color: #f8e1c6;
-  --text-color: #a06835;
+  --text-color: #7a5c36;
   --accent-color: #c1caa1;
   --white-color: #ffffff;
   --footer-color: #41443f;
@@ -61,12 +60,14 @@ body {
   text-decoration: none;
 }
 
-#signUpCard, #loginCard {
+#signUpCard,
+#loginCard {
   position: relative;
   overflow: visible; /* allow close button to appear outside */
 }
 
-#signUpCard .btn-close, #loginCard .btn-close {
+#signUpCard .btn-close,
+#loginCard .btn-close {
   position: absolute;
   top: -10px;
   right: -10px;
@@ -76,14 +77,14 @@ body {
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
   z-index: 10;
 }
- .login-form{
+.login-form {
   border: 2px solid var(--accent-color);
   color: var(--white-color);
   background-color: var(--accent-color);
- }
- .user-icon{
+}
+.user-icon {
   color: var(--text-color) !important;
- }
+}
 /* browse pets styling */
 .browse-pets-container h2 {
   color: var(--text-color);
