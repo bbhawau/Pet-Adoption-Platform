@@ -1,10 +1,8 @@
 {% extends "base.html" %}
 {% block title %}Home{% endblock %}
 
-{% block content %}
+{% block content %}  
 
-
-  
    <!-- Main Container -->
 <section class="main">
     <div class="container">
@@ -22,10 +20,13 @@
             Where Love and Paws meet 
             <img src="{{ url_for('static', filename='images/paw.png') }}" alt="paw icon" class="paw-icon"/>
           </p>
+          
+          
           <button class="adopt-btn">
             Adopt now 
             <img src="{{ url_for('static', filename='images/white paw.png') }}" alt="paw icon" class="paw-icon"/>
           </button>
+     
         </div>
         
       </div>
@@ -39,6 +40,7 @@
       <h2>Pets near you</h2>
       <a href="#">View all →</a>
     </div>
+    <div class="pets-slideshow">
     <div class="pets-list">
       <div class="pet-card">
         <img src="{{ url_for('static', filename='images/feline-1.png') }}" alt="Hamster">
@@ -66,6 +68,10 @@
         <p class="pet-meta">location • Breed</p>
       </div>
     </div>
+    <!-- Left and right arrows -->
+  <a class="prev" onclick="moveSlide(-1)">&#10094;</a>
+  <a class="next" onclick="moveSlide(1)">&#10095;</a>
+</div>
   </section>
   
   <!-- Our Team Section -->
@@ -81,5 +87,25 @@
     <p>Interested in joining our team? Click <a href="#">here</a></p>
   </section>
   
-    
+  <script>
+    let currentIndex = 0;
+  
+    function moveSlide(direction) {
+      const slides = document.querySelector('.pets-list');
+      const card = document.querySelector('.pet-card');
+      const cardWidth = card.offsetWidth + 20; // card width + gap
+      const visibleCards = Math.floor(slides.parentElement.offsetWidth / cardWidth);
+      const totalCards = document.querySelectorAll('.pet-card').length;
+  
+      currentIndex += direction;
+  
+      // Clamp the index
+      if (currentIndex < 0) currentIndex = 0;
+      if (currentIndex > totalCards - visibleCards) {
+        currentIndex = totalCards - visibleCards;
+      }
+  
+      slides.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+    }
+  </script>
 {% endblock %}

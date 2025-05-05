@@ -87,3 +87,4 @@ def adopt(animal_id):
 @login_required
 def how_it_works():
     return render_template("how_it_works.html")
+
