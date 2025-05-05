@@ -58,8 +58,10 @@
           <div class="navbar-nav ms-auto">
             <div class="nav-item dropdown">
               <a href="#" data-bs-toggle="modal" data-bs-target="#userModal">
+
                 <img src="{{ url_for('static', filename='icons/user.svg') }}" alt="User Icon" style="width: 30px;"
                   class="user-icon">
+
               </a>
             </div>
           </div>
@@ -70,6 +72,7 @@
       </div>
     </div>
   </nav>
+
   <!-- User Info Modal -->
   <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -100,10 +103,12 @@
             <a href="{{ url_for('auth.logout') }}" class="btn btn-danger w-100">Logout</a>
           </div>
 
+
         </div>
       </div>
     </div>
   </div>
+
 
   <!-- alert message -->
   {% with messages= get_flashed_messages(with_categories =true)%} {% if
