@@ -1,7 +1,7 @@
 :root {
-  --sand-color: #fff9f2;
-  --text-color: #442d17;
-  --accent-color: #c5cab4;
+  --sand-color: #f8e1c6;
+  --text-color: #7a5c36;
+  --accent-color: #c1caa1;
   --white-color: #ffffff;
   --footer-color: #41443f;
   --another-color: #ebe9e5;
@@ -39,6 +39,102 @@ body {
   background-color: var(--accent-color);
   color: var(--white-color) !important;
   border-radius: 5px;
+}
+.nav-item.nav-link.active {
+  background-color: var(--accent-color);
+  color: var(--white-color) !important;
+  border-radius: 5px;
+}
+/* Sign up and Login page styling */
+.sign-up {
+  border: 2px solid var(--accent-color);
+  color: var(--white-color);
+  background-color: var(--accent-color);
+  transition: all 0.3s ease-in-out;
+}
+
+.sign-up:hover {
+  background-color: var(--sand-color);
+  color: var(--accent-color);
+  border-color: var(--sand-color);
+  text-decoration: none;
+}
+
+#signUpCard,
+#loginCard {
+  position: relative;
+  overflow: visible; /* allow close button to appear outside */
+}
+
+#signUpCard .btn-close,
+#loginCard .btn-close {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background-color: white;
+  border-radius: 50%;
+  padding: 0.5rem;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+}
+.login-form {
+  border: 2px solid var(--accent-color);
+  color: var(--white-color);
+  background-color: var(--accent-color);
+}
+
+.user-icon {
+  color: var(--text-color) !important;
+}
+
+/* browse pets styling */
+.browse-pets-container h2 {
+  color: var(--text-color);
+}
+.browse-pets-container .card {
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.browse-pets-container .card img {
+  height: 150px;
+  object-fit: cover;
+}
+
+.browse-pets-container .group {
+  background-color: var(--accent-color);
+  text-align: center;
+}
+.browse-pets-container .card-body {
+  height: 100px;
+  overflow: hidden;
+  color: var(--text-color);
+}
+
+.search-wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+  border-radius: 5rem;
+  background-color: transparent;
+  border: 1px solid var(--text-color);
+}
+
+.search-input {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none;
+  background-color: transparent !important;
+}
+.search-input:focus {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.adopt-btn {
+  background-color: var(--accent-color) !important;
+  border: var(--accent-color) !important;
+  color: var(--text-color) !important;
 }
 
 /*How It Works Page*/
