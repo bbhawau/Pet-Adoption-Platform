@@ -327,6 +327,18 @@ body {
   display: block;
 }
 
+@media (max-width: 768px) {
+  .faq,
+  .pet {
+    max-width: 100%;
+  }
+
+  .info-section {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
 /* footer */
 
 .footer {
