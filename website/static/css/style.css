@@ -8,16 +8,24 @@
 }
 
 body {
+   padding-top: 70px;  /* Adjust this value based on your navbar height */
   background-color: var(--sand-color) !important;
   font-family: "Libre Baskerville", serif !important;
   font-weight: 400 !important;
   font-style: normal !important;
+
 }
 
 /* navbar styling */
 .navbar {
   background-color: var(--white-color) !important;
   padding: 0 2rem;  /* Add horizontal padding to the navbar */
+  position: fixed;  /* Fix the navbar */
+  top: 0;          /* Stick to top */
+  left: 0;         /* Align to left edge */
+  right: 0;        /* Align to right edge */
+  width: 100%;     /* Full width */
+  z-index: 1000;   /* Keep navbar above other content */
 }
 .navbar-logo-container {
   height: 50px;
