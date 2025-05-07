@@ -24,7 +24,9 @@
     <div class="container-fluid">
       <!-- Logo -->
       <div class="navbar-logo-container">
+          <a href="{{ url_for('views.home') }}">
         <img src="{{ url_for('static', filename='images/Bondly_logo.png') }}" alt="Bondly Logo" class="navbar-logo" />
+          </a>
       </div>
       <!-- nav bar toggler -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
