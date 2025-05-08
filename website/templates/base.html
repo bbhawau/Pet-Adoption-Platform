@@ -1,188 +1,247 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Home{% endblock %}</title>
+    <!-- Bootstrap 5.3.5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7"
+      crossorigin="anonymous"
+    />
+    <!-- CSS STYLING -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <!-- Google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}Home{% endblock %}</title>
-  <!-- Bootstrap 5.3.5 CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
-  <!-- CSS STYLING -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-  <!-- Google font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap"
-    rel="stylesheet">
-</head>
-
-<body>
-  <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-lg">
-    <div class="container-fluid">
-      <!-- Logo -->
-      <div class="navbar-logo-container">
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <!-- Logo -->
+        <div class="navbar-logo-container">
           <a href="{{ url_for('views.home') }}">
-        <img src="{{ url_for('static', filename='images/Bondly_logo.png') }}" alt="Bondly Logo" class="navbar-logo" />
+            <img
+              src="{{ url_for('static', filename='images/Bondly_logo.png') }}"
+              alt="Bondly Logo"
+              class="navbar-logo"
+            />
           </a>
-      </div>
-      <!-- nav bar toggler -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
-        aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarContent">
-        <div class="navbar-nav">
-          <a class="nav-item nav-link custom-nav-link {% if request.path == url_for('views.home') %}active{% endif %}"
-            href="{{ url_for('views.home') }}">Home</a>
-          {% if user.is_authenticated %}
-
-          <a class="nav-item nav-link custom-nav-link {% if request.path == url_for('views.browse_pets') %}active{% endif %}"
-            href="{{ url_for('views.browse_pets') }}">Browse Pets</a>
-          <a class="nav-item nav-link custom-nav-link {% if request.path == url_for('views.how_it_works') %}active{% endif %}"
-            href="{{ url_for('views.how_it_works') }}">How It works</a>
-          {% else %}
-          {% endif %}
-
         </div>
-        <!-- The following div will push the Sign Up button to the right -->
-        <div class="navbar-nav ms-auto ">
-          {% if not current_user.is_authenticated %}
-          <a href="{{ url_for('auth.sign_up') }}">
-            <button type="button" class="btn btn-outline-light mx-2 sign-up">Sign Up</button>
-          </a>
-          {% endif %}
+        <!-- nav bar toggler -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarContent"
+          aria-controls="navbarContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-          {% if current_user.is_authenticated %}
+        <div class="collapse navbar-collapse" id="navbarContent">
+          <div class="navbar-nav">
+            <a
+              class="nav-item nav-link custom-nav-link {% if request.path == url_for('views.home') %}active{% endif %}"
+              href="{{ url_for('views.home') }}"
+              >Home</a
+            >
+            {% if user.is_authenticated %}
+
+            <a
+              class="nav-item nav-link custom-nav-link {% if request.path == url_for('views.browse_pets') %}active{% endif %}"
+              href="{{ url_for('views.browse_pets') }}"
+              >Browse Pets</a
+            >
+            <a
+              class="nav-item nav-link custom-nav-link {% if request.path == url_for('views.how_it_works') %}active{% endif %}"
+              href="{{ url_for('views.how_it_works') }}"
+              >How It works</a
+            >
+            {% else %} {% endif %}
+          </div>
+          <!-- The following div will push the Sign Up button to the right -->
           <div class="navbar-nav ms-auto">
-            <div class="nav-item dropdown">
-              <a href="#" data-bs-toggle="modal" data-bs-target="#userModal">
+            {% if not current_user.is_authenticated %}
+            <a href="{{ url_for('auth.sign_up') }}">
+              <button type="button" class="btn btn-outline-light mx-2 sign-up">
+                Sign Up
+              </button>
+            </a>
+            {% endif %} {% if current_user.is_authenticated %}
+            <div class="navbar-nav ms-auto">
+              <div class="nav-item dropdown">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#userModal">
+                  <img
+                    src="{{ url_for('static', filename='icons/user.svg') }}"
+                    alt="User Icon"
+                    style="width: 30px"
+                    class="user-icon"
+                  />
+                </a>
+              </div>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </nav>
 
-                <img src="{{ url_for('static', filename='icons/user.svg') }}" alt="User Icon" style="width: 30px;"
-                  class="user-icon">
+    <!-- User Info Modal -->
+    <div
+      class="modal fade"
+      id="userModal"
+      tabindex="-1"
+      aria-labelledby="userModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-3">
+          <!-- Close button -->
+          <button
+            type="button"
+            class="btn-close ms-auto"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
 
-              </a>
+          <!-- Modal Body -->
+          <div class="modal-body text-center">
+            <!-- Large Centered User Icon -->
+            <img
+              src="{{ url_for('static', filename='icons/user.svg') }}"
+              alt="User Icon"
+              class="rounded-circle mb-3"
+              style="width: 80px; height: 80px"
+            />
+
+            <!-- User Info -->
+            <div
+              class="d-flex justify-content-between px-3 py-2 border-top border-bottom"
+            >
+              <strong>Name:</strong>
+              <span>{{ current_user.name }}</span>
+            </div>
+            <div class="d-flex justify-content-between px-3 py-2 border-bottom">
+              <strong>Email:</strong>
+              <span>{{ current_user.email }}</span>
+            </div>
+
+            <!-- Logout Button -->
+            <div class="mt-4">
+              <a
+                href="{{ url_for('auth.logout') }}"
+                class="btn btn-danger w-100"
+                >Logout</a
+              >
             </div>
           </div>
-          {% endif %}
-
-        </div>
-
-      </div>
-    </div>
-  </nav>
-
-  <!-- User Info Modal -->
-  <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content p-3">
-
-        <!-- Close button -->
-        <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
-
-        <!-- Modal Body -->
-        <div class="modal-body text-center">
-
-          <!-- Large Centered User Icon -->
-          <img src="{{ url_for('static', filename='icons/user.svg') }}" alt="User Icon" class="rounded-circle mb-3"
-            style="width: 80px; height: 80px;">
-
-          <!-- User Info -->
-          <div class="d-flex justify-content-between px-3 py-2 border-top border-bottom">
-            <strong>Name:</strong>
-            <span>{{ current_user.name }}</span>
-          </div>
-          <div class="d-flex justify-content-between px-3 py-2 border-bottom">
-            <strong>Email:</strong>
-            <span>{{ current_user.email }}</span>
-          </div>
-
-          <!-- Logout Button -->
-          <div class="mt-4">
-            <a href="{{ url_for('auth.logout') }}" class="btn btn-danger w-100">Logout</a>
-          </div>
-
-
         </div>
       </div>
     </div>
-  </div>
 
+    <!-- alert message -->
+    {% with messages= get_flashed_messages(with_categories =true)%} {% if
+    messages%} {% for category, message in messages%} {% if category ==
+    'error'%}
+    <div class="alert alert-danger alter-dismissable fade show" role="alert">
+      {{message}}
+      <button
+        type="button"
+        class="btn-close float-end"
+        data-bs-dismiss="alert"
+        aria-label="close"
+      ></button>
+    </div>
+    {% else %}
+    <div class="alert alert-success alter-dismissable fade show" role="alert">
+      {{message}}
+      <button
+        type="button"
+        class="btn-close float-end"
+        data-bs-dismiss="alert"
+        aria-label="close"
+      ></button>
+    </div>
+    {% endif %} {% endfor %} {% endif %} {% endwith %}
+    <!-- Page Content -->
+    <div class="container mt-4">{% block content %}{% endblock %}</div>
 
-  <!-- alert message -->
-  {% with messages= get_flashed_messages(with_categories =true)%} {% if
-  messages%} {% for category, message in messages%} {% if category ==
-  'error'%}
-  <div class="alert alert-danger alter-dismissable fade show" role="alert">
-    {{message}}
-    <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="close"></button>
-  </div>
-  {% else %}
-  <div class="alert alert-success alter-dismissable fade show" role="alert">
-    {{message}}
-    <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="close"></button>
-  </div>
-  {% endif %} {% endfor %} {% endif %} {% endwith %}
-  <!-- Page Content -->
-  <div class="container mt-4">{% block content %}{% endblock %}</div>
+    <!--footer-->
+    <footer class="footer">
+      <div class="footer-container">
+        <!--right side-->
+        <div class="footer-section">
+          <h4>BONDLY</h4>
+          <p>Nile University of Nigeria,<br />FCT, Abuja</p>
+          <p>Phone: +234 555 555 5555</p>
+          <p>Email: bondly@example.com</p>
+          <div class="social-icons">
+            <a href="#"
+              ><img src="../static/icons/facebook.svg" alt="Facebook Icon"
+            /></a>
+            <a href="#"
+              ><img src="../static/icons/instagram.svg" alt="Instagram Icon"
+            /></a>
+            <a href="#"
+              ><img src="../static/icons/twitter-x.svg" alt="Twitter Icon"
+            /></a>
+            <a href="#"
+              ><img src="../static/icons/linkedin.svg" alt="LinkedIn Icon"
+            /></a>
+          </div>
+        </div>
 
+        <!--centre-->
+        <div class="footer-section">
+          <h4>Useful Links</h4>
+          <a href="{{ url_for('views.home') }}">Home</a>
+          <a href="#">About Us</a>
+          <a href="#">Services</a>
+        </div>
 
-  <!--footer-->
-  <footer class="footer">
-    <div class="footer-container">
-      <!--right side-->
-      <div class="footer-section">
-        <h4>BONDLY</h4>
-        <p>Nile University of Nigeria,<br />FCT, Abuja</p>
-        <p>Phone: +234 555 555 5555</p>
-        <p>Email: bondly@example.com</p>
-        <div class="social-icons">
-          <a href="#"><img src="../static/icons/facebook.svg" alt="Facebook Icon" /></a>
-          <a href="#"><img src="../static/icons/instagram.svg" alt="Instagram Icon" /></a>
-          <a href="#"><img src="../static/icons/twitter-x.svg" alt="Twitter Icon" /></a>
-          <a href="#"><img src="../static/icons/linkedin.svg" alt="LinkedIn Icon" /></a>
+        <!--right side-->
+        <div class="footer-section">
+          <h4>Our Services</h4>
+          <a href="#">Pet Adoption</a>
+          <a href="#">Pet Training</a>
+        </div>
+
+        <!--newsletter-->
+        <div class="footer-section">
+          <h4>Our Newsletter</h4>
+          <p>
+            Subscribe to our newsletter and receive updates about the lovely
+            critters and events showcasing them!
+          </p>
+          <form class="newsletter-form">
+            <input type="email" placeholder="Enter your email" required />
+            <button type="submit">Subscribe</button>
+          </form>
         </div>
       </div>
 
-      <!--centre-->
-      <div class="footer-section">
-        <h4>Useful Links</h4>
-        <a href="#">Home</a>
-        <a href="#">About Us</a>
-        <a href="#">Services</a>
-      </div>
+      <div class="footer-bottom">© Copyright Bondly. All Rights Reserved</div>
+    </footer>
 
-      <!--right side-->
-      <div class="footer-section">
-        <h4>Our Services</h4>
-        <a href="#">Pet Adoption</a>
-        <a href="#">Pet Training</a>
-      </div>
-
-      <!--newsletter-->
-      <div class="footer-section">
-        <h4>Our Newsletter</h4>
-        <p>
-          Subscribe to our newsletter and receive updates about the lovely
-          critters and events showcasing them!
-        </p>
-        <form class="newsletter-form">
-          <input type="email" placeholder="Enter your email" required />
-          <button type="submit">Subscribe</button>
-        </form>
-      </div>
-    </div>
-
-    <div class="footer-bottom">© Copyright Bondly. All Rights Reserved</div>
-  </footer>
-
-  <!-- BOOTSTRAP 5.3.5 BUNDLE WITH POPPER -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
-    crossorigin="anonymous"></script>
-</body>
-
+    <!-- BOOTSTRAP 5.3.5 BUNDLE WITH POPPER -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
