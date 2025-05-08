@@ -1,7 +1,165 @@
 {% extends "base.html" %}
 {% block title %}Home{% endblock %}
 
-{% block content %}
-<h1>Welcome to PetPalace!</h1>
-<p>Find your next furry best friend 🐶🐱</p>
+{% block content %}  
+
+   <!-- Main Container -->
+<section class="main">
+    <div class="container">
+      <div class="row align-items-center">
+        <!-- Image on the Left -->
+        <div class="col-md-6 img-txt image-side">
+          <img src="{{ url_for('static', filename='images/homepage-family.png') }}" alt="Happy Family with Dog"/>
+        </div>
+
+        <!-- Text on the Right -->
+        <div class="col-md-6 img-txt text-side">
+          <h1>HAPPY PET,<br>HAPPY HOME!</h1>
+          <p>
+            Where Love and Paws meet
+            <img src="{{ url_for('static', filename='images/paw.png') }}" alt="paw icon" class="paw-icon"/>
+          </p>
+
+          <a href="/sign" class="get-started-btn">
+    Get Started
+    <img src="{{ url_for('static', filename='images/white paw.png') }}" alt="paw icon" class="paw-icon"/>
+</a>
+        </div>
+      </div>
+    </div>
+</section>
+  
+
+  <!-- Pets Available for Adoption -->
+  <section class="pets-available">
+    <div class="section-header">
+      <h2>Pets available for adoption... </h2>
+    </div>
+    <div class="pets-slideshow">
+    <div class="pets-list">
+      <div class="pet-card">
+        <img src="{{ url_for('static', filename='images/bengalcat.jpeg') }}" alt="Bengal cat">
+        <p class="pet-name">Nala</p>
+
+      </div>
+      <div class="pet-card">
+        <img src="{{ url_for('static', filename='images/jake.jpeg') }}" alt="Husky">
+        <p class="pet-name">Jake</p>
+
+      </div>
+      <div class="pet-card">
+        <img src="{{ url_for('static', filename='images/thor.jpeg') }}" alt="eagle">
+        <p class="pet-name">Thor</p>
+
+      </div>
+         <div class="pet-card">
+        <img src="{{ url_for('static', filename='images/biscuit.jpeg') }}" alt="cat">
+        <p class="pet-name">Biscuit</p>
+
+      </div>
+      <div class="pet-card">
+        <img src="{{ url_for('static', filename='images/grey cat.jpeg') }}" alt="cat">
+        <p class="pet-name">Poseidon</p>
+
+      </div>
+      <div class="pet-card">
+        <img src="{{ url_for('static', filename='images/rott.jpeg') }}" alt="cow">
+        <p class="pet-name">Lily</p>
+
+      </div>
+        <div class="pet-card">
+        <img src="{{ url_for('static', filename='images/klaus.jpeg') }}" alt="cat">
+        <p class="pet-name">Klaus</p>
+
+      </div>
+         <div class="pet-card">
+        <img src="{{ url_for('static', filename='images/Frame 10.png') }}" alt="cow">
+        <p class="pet-name">Mika</p>
+
+      </div>
+
+        <div class="pet-card">
+        <img src="{{ url_for('static', filename='images/owl.png') }}" alt="owl">
+        <p class="pet-name">Nala</p>
+
+      </div>
+    </div>
+    <!-- Left and right arrows -->
+  <a class="prev" onclick="moveSlide(-1)">&#10094;</a>
+  <a class="next" onclick="moveSlide(1)">&#10095;</a>
+</div>
+  </section>
+  
+  <!-- Our Team Section -->
+  <section class="team">
+    <h2>Our team</h2>
+    <div class="team-members">
+      <div class="team-member">Adaure</div>
+      <div class="team-member">Hawau</div>
+      <div class="team-member">Rifqa</div>
+      <div class="team-member">Moria</div>
+      <div class="team-member">Doreen</div>
+    </div>
+    <p>Interested in joining our team? Click <a href="#">here</a></p>
+  </section>
+  
+  <script>
+   document.addEventListener('DOMContentLoaded', function() {
+    const slideList = document.querySelector('.pets-list');
+    const cards = document.querySelectorAll('.pet-card');
+    const cardWidth = cards[0].offsetWidth + 20; // card width + gap
+    let currentIndex = 0;
+
+    // Clone the original cards and append them to create the infinite effect
+    cards.forEach(card => {
+        const clone = card.cloneNode(true);
+        slideList.appendChild(clone);
+    });
+
+    function moveSlide(direction) {
+        const totalCards = cards.length;
+        currentIndex += direction;
+        slideList.style.transition = 'transform 0.3s ease-in-out';
+
+        if (direction > 0) {
+            // Moving forward
+            slideList.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+
+            // If we've reached the cloned set
+            if (currentIndex >= totalCards) {
+                setTimeout(() => {
+                    slideList.style.transition = 'none';
+                    currentIndex = 0;
+                    slideList.style.transform = `translateX(0)`;
+                }, 300); // Wait for transition to complete
+            }
+        } else {
+            // Moving backward
+            if (currentIndex < 0) {
+                currentIndex = totalCards - 1;
+                slideList.style.transition = 'none';
+                slideList.style.transform = `translateX(-${(totalCards) * cardWidth}px)`;
+                setTimeout(() => {
+                    slideList.style.transition = 'transform 0.3s ease-in-out';
+                    slideList.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+                }, 10);
+            } else {
+                slideList.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+            }
+        }
+    }
+
+    // Make title clickable
+    document.querySelector('.section-header h2').addEventListener('click', function() {
+        window.location.href = '/browse';
+    });
+
+    // Auto slide every 5 seconds
+    setInterval(() => moveSlide(1), 5000);
+
+    // Add event listeners for the arrows
+    document.querySelector('.prev').addEventListener('click', () => moveSlide(-1));
+    document.querySelector('.next').addEventListener('click', () => moveSlide(1));
+});
+</script>
 {% endblock %}

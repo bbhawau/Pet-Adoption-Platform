@@ -1,62 +1,108 @@
-{% extends "base.html" %}
-{% block title %}Sign up{% endblock %}
+{% extends "base.html" %} {% block title %}Sign up{% endblock %} {% block
+content %}
 
-{% block content %}
+<!-- Sign Up Modal -->
+<div
+  class="modal fade"
+  id="signUpModal"
+  tabindex="-1"
+  aria-labelledby="signUpModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <!-- Close Button with Background -->
+      <button
+        type="button"
+        class="btn-close position-absolute top-0 end-0 m-3 p-2 bg-light rounded-circle"
+        data-bs-dismiss="modal"
+        aria-label="Close"
+        style="opacity: 1"
+      ></button>
 
-
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-lg-8 col-md-10 col-sm-12">
-            <!-- Card with Sign Up Form Split into Two Sections -->
-            <div class="card" id="signUpCard" >
-                <div class="row g-0">
-                    <!-- Left Side (Form) -->
-                    <div class="col-md-6">
-                        <div class="card-body">
-                            <h5 class="card-title">Sign Up</h5>
-                            <form method="POST">
-                                <div class="mb-3">
-                                    <label for="name" class="form-label">Name</label>
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="email" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="password1" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="password1" name="password1" placeholder="Enter password" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="password2" class="form-label">Confirm Password</label>
-                                    <input type="password" class="form-control" id="password2" name="password2" placeholder="Confirm password" required>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Sign Up</button>
-                            </form>
-                            <p class="mt-3">Already have an account? <a href="{{ url_for('auth.login') }}">Login</a></p>
-                        </div>
-                    </div>
-                    <!-- Right Side (Image) -->
-                    <div class="col-md-6">
-                        <img src="{{ url_for('static', filename='images/cats1.jpg') }}" class="img-fluid" alt="Sign Up Image" style="height: 100%; object-fit: cover;">
-                    </div>
-                </div>
-                <!-- Close Button (Cancel) -->
-                <button type="button" class="btn-close" onclick="closeCard(), goToHomePage()" aria-label="Close" style="position: absolute; top: 10px; right: 10px;"></button>
-            </div>
+      <div class="row g-0">
+        <!-- Left Side (Form) -->
+        <div class="col-md-6">
+          <div class="card-body p-4">
+            <h5 class="card-title">Sign Up</h5>
+            <form method="POST">
+              <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="name"
+                  name="name"
+                  placeholder="Enter your name"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  name="email"
+                  placeholder="Enter your email"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="password1" class="form-label">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password1"
+                  name="password1"
+                  placeholder="Enter password"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="password2" class="form-label"
+                  >Confirm Password</label
+                >
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password2"
+                  name="password2"
+                  placeholder="Confirm password"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn btn-primary w-100">
+                Sign Up
+              </button>
+            </form>
+            <p class="mt-3 text-center">
+              Already have an account?
+              <a href="{{ url_for('auth.login') }}">Login</a>
+            </p>
+          </div>
         </div>
+
+        <!-- Right Side (Image) -->
+        <div class="col-md-6 d-none d-md-block">
+          <img
+            src="{{ url_for('static', filename='images/login cat.jpg') }}"
+            class="img-fluid w-100 h-100"
+            alt="Sign Up Image"
+            style="object-fit: cover"
+          />
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 
-<!-- JavaScript to Hide the Card -->
+<!-- Script to auto-show modal if page is directly loaded -->
 <script>
-    function closeCard() {
-        var card = document.getElementById('signUpCard');
-        card.style.display = 'none'; // Hide the card when "X" is clicked
-    }
-    function goToHomePage() {
-        window.location.href = "{{ url_for('views.home') }}";  // Redirect to the homepage
-    }
+  window.addEventListener("DOMContentLoaded", () => {
+    const modal = new bootstrap.Modal(document.getElementById("signUpModal"));
+    modal.show();
+  });
 </script>
 
 {% endblock %}

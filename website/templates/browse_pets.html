@@ -1,6 +1,102 @@
 {% extends "base.html" %}
 {% block title %}Browse Pets{% endblock %}
 {% block content %}
+<div class="browse-pets-container">
+  
 
+  <!-- Search bar with clear button -->
+  <div class="search-wrapper mb-4 d-flex align-items-center gap-2 px-3 py-2">
+    <input type="text" id="searchInput" class="form-control search-input" placeholder="Search for pets..." onkeyup="searchPets()">
+    <button id="clearSearch" class="btn btn-outline-secondary" style="display: none;" onclick="clearSearch()">✕</button>
+  </div>
+  
 <h2>Need a new friend? You've come to the right place</h2>
+<div class="container mt-4">
+  {% for group, animals in animal_groups.items() %}
+    <h3 class="mb-3 group">{{ group }}</h3>
+    <div class="row flex-nowrap overflow-auto gap-3 mb-5 d-sm-flex d-md-flex d-lg-flex" id="group-{{ group }}">
+      {% for animal in animals %}
+        <div class="col-8 col-sm-6 col-md-4 col-lg-3 col-xl-2 pet-card-wrapper" data-name="{{ animal.name }}" data-breed="{{ animal.breed }}" data-age="{{ animal.age }}">
+          <div class="card pet-card h-100" style="border-radius: 1rem; overflow: hidden;">
+            <img src="{{ url_for('static', filename='images/' + animal.image) }}" class="card-img-top" alt="{{ animal.name }}">
+            <div class="card-body d-flex flex-column justify-content-between" style="height: 180px;">
+              <div>
+                <h5 class="card-title mb-1">{{ animal.name }}</h5>
+                <p class="card-breed mb-1 text-muted">Breed: {{ animal.breed }}</p>
+                <p class="card-age mb-2 text-muted">Age: {{ animal.age }} years old</p>
+              </div>
+              <a href="{{ url_for('views.adopt', animal_id=animal.id) }}" class="btn btn-primary btn-sm mt-auto adopt-btn">Adopt</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% endfor %}
+</div>
+
+
+</div>
+
+<!-- JavaScript for searching and clearing -->
+<script>
+  function searchPets() {
+    const searchInput = document.getElementById('searchInput').value.toLowerCase();
+    const clearSearchButton = document.getElementById('clearSearch');
+
+    // Show the "clear" button if there's text in the search bar
+    if (searchInput.length > 0) {
+      clearSearchButton.style.display = 'block';
+    } else {
+      clearSearchButton.style.display = 'none';
+    }
+
+    // Get all pet groups
+    const groups = document.querySelectorAll('.row');
+
+    groups.forEach(group => {
+      const cards = Array.from(group.getElementsByClassName('pet-card-wrapper'));
+
+      // Filter the pet cards within each group
+      const filteredCards = cards.filter(card => {
+        const name = card.getAttribute('data-name').toLowerCase();
+        const breed = card.getAttribute('data-breed').toLowerCase();
+        const age = card.getAttribute('data-age').toLowerCase();
+
+        // Show the card if the search term matches any of the card's attributes
+        return name.includes(searchInput) || breed.includes(searchInput) || age.includes(searchInput);
+      });
+
+      // Hide all the cards first
+      cards.forEach(card => {
+        card.style.display = 'none';
+      });
+
+      // Show the filtered cards
+      filteredCards.forEach(card => {
+        card.style.display = 'block';
+      });
+    });
+  }
+
+  function clearSearch() {
+    // Clear the search input and hide the "clear" button
+    document.getElementById('searchInput').value = '';
+    document.getElementById('clearSearch').style.display = 'none';
+
+    // Get all pet groups
+    const groups = document.querySelectorAll('.row');
+
+    groups.forEach(group => {
+      const cards = Array.from(group.getElementsByClassName('pet-card-wrapper'));
+
+      // Show all cards and reset visibility
+      cards.forEach(card => {
+        card.style.display = 'block';
+      });
+    });
+  }
+</script>
+
+
+
 {% endblock %}

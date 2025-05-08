@@ -1,96 +1,209 @@
-{% extends "base.html" %} {% block title %}How It Works{% endblock %} {% block
-content %}
-
-<footer class="footer">
-  <div class="overlap-group">
-    <div class="rectangle"></div>
-
-    <p class="BONDLY-nile">
-      BONDLY
-      <br /><br />
-      Nile University of Nigeria,
-      <br />
-      FCT, Abuja
-      <br /><br />
-      Phone: +234 555 555 5555
-      <br /><br />
-      Email: bondly@example.com
-    </p>
-
-    <div class="useful-links-home">
-      Useful Links
-      <br /><br />
-      Home
-      <br /><br />
-      About Us
-      <br /><br />
-      Services
-    </div>
-
-    <p class="our-services-pet">
-      <span class="text-wrapper">
-        Our Services
-        <br /><br />
-        Pet Adoption
-        <br /><br />
-        Pet Training
-      </span>
-      <span class="span"><br /></span>
-    </p>
-
-    <p class="our-newsletter">
-      Our Newsletter
-      <br /><br />
-      Subscribe to our newsletter and receive updates about the lovely critters
-      and events showcasing them!
-    </p>
-
-    <div class="copyright-bondly-all">
-      © Copyright   Bondly  All Rights Reserved
-    </div>
-
-    <div class="rectangle-2"></div>
-
-    <div class="rectangle-3"></div>
-
-    <div class="subscribe">
-      <br />
-      Subscribe
-    </div>
-
-    <div class="SC-icons">
-      <div class="linked-in">
-        <img
-          src="..\static\images\linkedin.svg"
-          alt="LinkedIn Icon"
-          class="icon-instance-node"
-        />
+{% extends "base.html" %} {% block title %}How It Works{% endblock %}
+{% block content %}
+<!--flex container for whole page-->
+<div class="main-content">
+  <section class="steps-container">
+    <h2 class="steps-title">STEPS TO ADOPT</h2>
+    <div class="steps-grid">
+      <a href="{{ url_for('views.browse_pets') }}" class="step-card">
+        <!--Links to browse pets page-->
+        <img src="../static/images/Frame 5.png" alt="Find your match" />
+        <div class="step-text one">
+          <h3>Find your match</h3>
+          <p>
+            Browse available pets<br />
+            and choose the one<br />
+            that feels right for you
+          </p>
+        </div>
+      </a>
+      <a href="#apply" class="step-card"><!--Links to adoption form-->
+        <img src="../static/images/form.png" alt="Apply to Adopt" />
+        <div class="step-text two">
+          <h3>Apply to Adopt</h3>
+          <p>
+            Fill out a quick adoption<br />
+            application online.
+          </p>
+        </div>
+      </a>
+      <div class="step-card">
+        <img src="../static/images/Frame 4.png" alt="Meet and Connect" />
+        <div class="step-text three">
+          <h3>Meet & Connect</h3>
+          <p>
+            Visit or virtually meet the pet<br />
+            to make sure it’s a good fit
+          </p>
+        </div>
       </div>
-
-      <div class="x">
-        <img
-          src="..\static\images\twitter-x.svg"
-          alt="Twitter Icon"
-          class="icon-instance-node"
-        />
-      </div>
-
-      <div class="instagram">
-        <img
-          src="..\static\images\instagram.svg"
-          alt="Instagram Icon"
-          class="icon-instance-node"
-        />
-      </div>
-
-      <div class="facebook">
-        <img
-          src="..\static\images\facebook.svg"
-          alt="Facebook Icon"
-          class="icon-instance-node"
-        />
+      <div class="step-card">
+        <img src="../static/images/hamster.jpeg" alt="Bring Them Home" />
+        <div class="step-text four">
+          <h3>Bring Them Home</h3>
+          <p>
+            Finalise the adoption<br />
+            and start your new life together!
+          </p>
+        </div>
       </div>
     </div>
+  </section>
+
+  <div class="info-head">
+    <h1>HOW IT WORKS</h1>
   </div>
-</footer>
+  <section class="info-section">
+    <div class="accordion-container, faq">
+      <!--FAQs-->
+      <div class="info-head">
+        <h2>FREQUENTLY ASKED QUESTIONS</h2>
+      </div>
+      <div class="accordion">
+        <button class="accordion-btn">
+          How does the adoption process work?
+        </button>
+        <div class="panel">
+          You browse available pets, fill out an application, and once approved,
+          you're connected with the shelter or foster for next steps like a
+          meet-and-greet or home check.
+        </div>
+
+        <button class="accordion-btn">Is there an adoption fee?</button>
+        <div class="panel">
+          Yes, the fee helps cover vaccinations, microchipping,
+          spaying/neutering, and basic care. It varies by organization.
+        </div>
+
+        <button class="accordion-btn">
+          How long does the adoption process take?
+        </button>
+        <div class="panel">
+          On average, the process takes between 3–10 days, depending on how
+          quickly references are checked and meet-and-greets can be scheduled.
+        </div>
+
+        <button class="accordion-btn">
+          Can I adopt if I live in a different city or state?
+        </button>
+        <div class="panel">
+          Some shelters allow out-of-area adoptions, but others may not.
+        </div>
+
+        <button class="accordion-btn">
+          What if the adoption doesn’t work out?
+        </button>
+        <div class="panel">
+          Most shelters offer a trial period or return policy. Always check with
+          the specific organization beforehand.
+        </div>
+
+        <button class="accordion-btn">
+          Are the pets vaccinated and spayed/neutered?
+        </button>
+        <div class="panel">
+          Yes, in most cases. Each pet’s profile will include details about
+          medical history, vaccinations, and whether they are already
+          spayed/neutered.
+        </div>
+
+        <button class="accordion-btn">
+          Can I adopt a pet if I have young children?
+        </button>
+        <div class="panel">
+          Absolutely! Just make sure to filter for pets that are marked as
+          “kid-friendly.” We also recommend scheduling a meet-and-greet to see
+          how they interact.
+        </div>
+
+        <button class="accordion-btn">
+          Do I need to have a backyard to adopt?
+        </button>
+        <div class="panel">
+          Not necessarily. Some pets (like larger or more active breeds) may
+          need outdoor space, but many do well in apartments with regular walks
+          and playtime.
+        </div>
+      </div>
+    </div>
+
+    <!--The accordion classes is for the dropdown parts, and work with the js code below-->
+
+    <div class="accordion-container, pet">
+      <!--PET CARE-->
+      <div class="info-head">
+        <h2>PET CARE 101</h2>
+      </div>
+      <div class="accordion">
+        <button class="accordion-btn">Daily Essentials</button>
+        <div class="panel">
+          <b>Fresh Water:</b> Always keep a bowl of clean water available.<br />
+          <b>Nutritious Food:</b> Feed according to pet age, size, and species.
+          Use vet-recommended brands.<br />
+          <b>Exercise:</b> Daily walks (for dogs) or playtime (for cats and
+          others) keeps your pet healthy and happy.<br />
+          <b>Affection & Attention:</b> Regular cuddles, talking, and
+          interaction build trust.
+        </div>
+
+        <button class="accordion-btn">Health & Wellness</button>
+        <div class="panel">
+          <b>Vet Visits:</b> Schedule a vet visit within a week of adoption.
+          Annual checkups after that.<br />
+          <b>Vaccinations:</b> Keep your pet’s shots up to date. Ask your vet
+          for a schedule.<br />
+          <b>Flea & Tick Prevention:</b> Use recommended treatments monthly.<br />
+          <b>Spay/Neuter:</b> Helps prevent overpopulation and can improve
+          behavior and health.
+        </div>
+
+        <button class="accordion-btn">Safe & Comfy Home Setup</button>
+        <div class="panel">
+          <b>Sleeping Spot:</b> Give them a cozy, quiet area of their own.<br />
+          <b>Pet-Proofing:</b> Remove toxic plants, secure loose wires, and keep
+          harmful items out of reach.<br />
+          <b>Toys & Enrichment:</b> Chew toys, scratchers, puzzles — keep
+          boredom at bay!
+        </div>
+
+        <button class="accordion-btn">Grooming</button>
+        <div class="panel">
+          <b>Bathing:</b> Dogs usually need a bath every few weeks; cats often
+          groom themselves.<br />
+          <b>Brushing:</b> Helps prevent shedding and mats (especially for
+          long-haired pets).<br />
+          <b>Nails:</b> Trim monthly or as needed.<br />
+          <b>Dental</b> Care: Brush teeth if possible; dental chews help too.
+        </div>
+
+        <button class="accordion-btn">Training & Socialisation</button>
+        <div class="panel">
+          <b>Basic Commands:</b> Sit, stay, come — these are great for bonding
+          and safety.<br />
+          <b>Positive Reinforcement:</b> Always reward, never punish.<br />
+          <b>Social Exposure:</b> Introduce slowly to other pets and people.
+        </div>
+
+        <button class="accordion-btn">Emotional needs</button>
+        <div class="panel">
+          <b>Patience:</b> It takes time for a pet to adjust. Let them move at
+          their own pace.<br />
+          <b>Consistency:</b> Routine builds trust and reduces stress.<br />
+          <b>Love:</b> You’re their world now — show them love and they'll give
+          it back tenfold.
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  document.querySelectorAll(".accordion-btn").forEach((button) => {
+    button.addEventListener("click", () => {
+      button.classList.toggle("active");
+      const panel = button.nextElementSibling;
+      panel.classList.toggle("show");
+    });
+  });
+</script>
 {% endblock %}
