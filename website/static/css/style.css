@@ -464,8 +464,14 @@ body::-webkit-scrollbar {
 }
 
 .row {
+  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer and Edge */
   width: 100%;
 }
+.row::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari, and Opera */
+}
+
 
 .image-side {
   flex: 1;
@@ -504,8 +510,8 @@ body::-webkit-scrollbar {
 }
 
 .paw-icon {
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
   object-fit: contain;
 }
 
@@ -564,6 +570,11 @@ body::-webkit-scrollbar {
   transform: scale(1.05);
   color: var(--accent-color);
 }
+.section-header .arrow {
+    font-size: 1.2em;
+    margin-left: 5px;
+}
+
 
 .pets-slideshow {
   position: relative;
@@ -657,6 +668,7 @@ body::-webkit-scrollbar {
 .team {
   padding: 40px;
   text-align: center;
+  color: var(--white-color);
 }
 
 .team-members {
@@ -668,7 +680,7 @@ body::-webkit-scrollbar {
 }
 
 .team-member {
-  background-color: #e7e1d5;
+  background-color: var(--accent-color);
   border-radius: 50%;
   width: 90px;
   height: 90px;
