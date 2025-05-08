@@ -40,7 +40,6 @@ def sign_up():
 #login
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
-    show_login = request.args.get('show_login') == '1'
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
@@ -55,7 +54,7 @@ def login():
                 flash('Incorrect password, try again.', category='error')
         else:
             flash('Email does not exist.', category='error')
-    return render_template("home.html", show_login=show_login, user=current_user)
+    return render_template("login.html", user=current_user)
 
 # logout
 @auth.route('/logout')
