@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, flash, redirect, url_for
+from flask import Blueprint, render_template,request, flash, redirect, url_for
 from flask_login import login_required,  current_user
 from .models import Animal, AnimalGroup
 
@@ -8,7 +8,9 @@ views = Blueprint('views', __name__)
 
 @views.route('/')
 def home():
-    return render_template("home.html")
+    show_signup = request.args.get('show_signup') == '1'
+    return render_template('home.html', show_signup=show_signup, user=current_user)
+
 
 
 @views.route('/browse')
@@ -28,3 +30,4 @@ def adopt(animal_id):
 @login_required
 def how_it_works():
     return render_template("how_it_works.html")
+
