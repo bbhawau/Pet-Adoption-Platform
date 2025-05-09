@@ -2,14 +2,14 @@
 {% block title %}Browse Pets{% endblock %}
 {% block content %}
 <div class="browse-pets-container">
-  
+
 
   <!-- Search bar with clear button -->
   <div class="search-wrapper mb-4 d-flex align-items-center gap-2 px-3 py-2">
     <input type="text" id="searchInput" class="form-control search-input" placeholder="Search for pets..." onkeyup="searchPets()">
     <button id="clearSearch" class="btn btn-outline-secondary" style="display: none;" onclick="clearSearch()">✕</button>
   </div>
-  
+
 <h2>Need a new friend? You've come to the right place</h2>
 <div class="container mt-4 petGroupsContainer">
   {% for group, animals in animal_groups.items() %}
@@ -28,6 +28,7 @@
               <a href="{{ url_for('views.adopt', animal_id=animal.id) }}" class="btn btn-primary btn-sm mt-auto adopt-btn">Adopt</a>
             </div>
           </div>
+
         </div>
       {% endfor %}
     </div>
@@ -47,40 +48,40 @@
     const clearSearchButton = document.getElementById('clearSearch');
     const noResultsMessage = document.getElementById('noResultsMessage');
     const petGroupsContainer = document.querySelector('.petGroupsContainer');
-  
+
     // Show the "clear" button if there's text in the search bar
     clearSearchButton.style.display = searchInput.length > 0 ? 'block' : 'none';
-  
+
     const groups = document.querySelectorAll('.row');
     let anyVisible = false;
-  
+
     groups.forEach(group => {
       const cards = Array.from(group.getElementsByClassName('pet-card-wrapper'));
-  
+
       const filteredCards = cards.filter(card => {
         const name = card.getAttribute('data-name').toLowerCase();
         const breed = card.getAttribute('data-breed').toLowerCase();
         const age = card.getAttribute('data-age').toLowerCase();
-  
+
         return name.includes(searchInput) || breed.includes(searchInput) || age.includes(searchInput);
       });
-  
+
       // Hide all cards first
       cards.forEach(card => {
         card.style.display = 'none';
       });
-  
+
       // Show matching cards
       filteredCards.forEach(card => {
         card.style.display = 'block';
       });
-  
+
       // If this group has any visible cards, mark the flag
       if (filteredCards.length > 0) {
         anyVisible = true;
       }
     });
-  
+
     // Toggle the visibility of the "No results" message
     if (anyVisible) {
       petGroupsContainer.style.display = 'block';
@@ -90,29 +91,28 @@
       noResultsMessage.style.display = 'block'; // Show the "No pets found" message
     }
   }
-  
+
   function clearSearch() {
     // Clear the search input and hide the "clear" button
     document.getElementById('searchInput').value = '';
     document.getElementById('clearSearch').style.display = 'none';
-  
+
     // Get all pet groups and reset them
     const groups = document.querySelectorAll('.row');
-  
+
     groups.forEach(group => {
       const cards = Array.from(group.getElementsByClassName('pet-card-wrapper'));
-  
+
       // Show all cards and reset visibility
       cards.forEach(card => {
         card.style.display = 'block';
       });
     });
-  
+
     // Show the pet groups and hide the "No results" message
     document.querySelector('.petGroupsContainer').style.display = 'block';
     document.getElementById('noResultsMessage').style.display = 'none';
   }
-  
 </script>
 
 
