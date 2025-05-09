@@ -3,15 +3,19 @@
 
 {% block content %}
 <div class="browse-pets-container">
-  <!-- Search bar with clear button -->
+  <!-- Search bar with a clear-button -->
   <div class="search-wrapper mb-4 d-flex align-items-center gap-2 px-3 py-2">
-    <input
-      type="text"
-      id="searchInput"
-      class="form-control search-input"
-      placeholder="Search for pets..."
-      onkeyup="searchPets()"
-    >
+      <!-- Search input -->
+<input
+    type="text"
+    id="searchInput"
+    class="form-control search-input"
+    placeholder="Search for pets..."
+    aria-label="Search for pets"
+    role="searchbox"
+    onkeyup="searchPets()"
+>
+      <!-- Clear button -->
     <button
       id="clearSearch"
       class="btn btn-outline-secondary"
@@ -19,6 +23,7 @@
       onclick="clearSearch()"
     >✕</button>
   </div>
+
 
   <h2>Need a new friend? You've come to the right place</h2>
 
@@ -75,6 +80,7 @@
                breed.includes(searchInput) ||
                age.includes(searchInput);
       });
+
 
       cards.forEach(card => card.style.display = 'none');
       filteredCards.forEach(card => card.style.display = 'block');
