@@ -19,12 +19,20 @@
             Where Love and Paws meet
             <img src="{{ url_for('static', filename='images/paw.png') }}" alt="paw icon" class="paw-icon"/>
           </p>
+ {% if current_user.is_authenticated %}
+ <a href="/browse" class="get-started-btn">
+      Browse Pets
+      <img src="{{ url_for('static', filename='images/white paw.png') }}" alt="paw icon" class="paw-icon"/>
+    </a>
+  {% else %}
 
-          <a href="/sign" class="get-started-btn">
-    Get Started
+          <a href="/login" class="get-started-btn">
+    Sign In
     <img src="{{ url_for('static', filename='images/white paw.png') }}" alt="paw icon" class="paw-icon"/>
 </a>
+             {% endif %}
         </div>
+
       </div>
     </div>
 </section>
@@ -33,61 +41,30 @@
   <!-- Pets Available for Adoption -->
   <section class="pets-available">
     <div class="section-header">
-      <h2>Pets available for adoption... </h2>
+      <h2>Pets available for adoption...› </h2>
     </div>
     <div class="pets-slideshow">
     <div class="pets-list">
-      <div class="pet-card">
-        <img src="{{ url_for('static', filename='images/bengalcat.jpeg') }}" alt="Bengal cat">
-        <p class="pet-name">Nala</p>
-
-      </div>
-      <div class="pet-card">
-        <img src="{{ url_for('static', filename='images/jake.jpeg') }}" alt="Husky">
-        <p class="pet-name">Jake</p>
-
-      </div>
-      <div class="pet-card">
-        <img src="{{ url_for('static', filename='images/thor.jpeg') }}" alt="eagle">
-        <p class="pet-name">Thor</p>
-
-      </div>
-         <div class="pet-card">
-        <img src="{{ url_for('static', filename='images/biscuit.jpeg') }}" alt="cat">
-        <p class="pet-name">Biscuit</p>
-
-      </div>
-      <div class="pet-card">
-        <img src="{{ url_for('static', filename='images/grey cat.jpeg') }}" alt="cat">
-        <p class="pet-name">Poseidon</p>
-
-      </div>
-      <div class="pet-card">
-        <img src="{{ url_for('static', filename='images/rott.jpeg') }}" alt="cow">
-        <p class="pet-name">Lily</p>
-
-      </div>
-        <div class="pet-card">
-        <img src="{{ url_for('static', filename='images/klaus.jpeg') }}" alt="cat">
-        <p class="pet-name">Klaus</p>
-
-      </div>
-         <div class="pet-card">
-        <img src="{{ url_for('static', filename='images/Frame 10.png') }}" alt="cow">
-        <p class="pet-name">Mika</p>
-
-      </div>
-
-        <div class="pet-card">
-        <img src="{{ url_for('static', filename='images/owl.png') }}" alt="owl">
-        <p class="pet-name">Nala</p>
-
-      </div>
+       {% for card in [
+                {'image': 'bengalcat.jpeg', 'name': 'Nala'},
+                {'image': 'jake.jpeg', 'name': 'Jake'},
+                {'image': 'thor.jpeg', 'name': 'Thor'},
+                {'image': 'biscuit.jpeg', 'name': 'Biscuit'},
+                {'image': 'grey cat.jpeg', 'name': 'Poseidon'},
+                {'image': 'snow.jpeg', 'name': 'Snow'},
+                {'image': 'klaus.jpeg', 'name': 'Klaus'},
+                {'image': 'Frame 10.png', 'name': 'Mika'},
+                {'image': 'owl.png', 'name': 'Atlas'}
+            ] %}
+            <div class="pet-card">
+                <img src="{{ url_for('static', filename='images/' + card.image) }}" alt="{{ card.name }}">
+                <p class="pet-name">{{ card.name }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        <a class="prev">&#10094;</a>
+        <a class="next">&#10095;</a>
     </div>
-    <!-- Left and right arrows -->
-  <a class="prev" onclick="moveSlide(-1)">&#10094;</a>
-  <a class="next" onclick="moveSlide(1)">&#10095;</a>
-</div>
   </section>
   
   <!-- Our Team Section -->
@@ -100,66 +77,80 @@
       <div class="team-member">Moria</div>
       <div class="team-member">Doreen</div>
     </div>
-    <p>Interested in joining our team? Click <a href="#">here</a></p>
+
   </section>
   
   <script>
-   document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
     const slideList = document.querySelector('.pets-list');
     const cards = document.querySelectorAll('.pet-card');
-    const cardWidth = cards[0].offsetWidth + 20; // card width + gap
-    let currentIndex = 0;
+    const prevButton = document.querySelector('.prev');
+    const nextButton = document.querySelector('.next');
 
-    // Clone the original cards and append them to create the infinite effect
+    // Clone cards for infinite effect
     cards.forEach(card => {
         const clone = card.cloneNode(true);
         slideList.appendChild(clone);
     });
 
+    let position = 0;
+    const cardWidth = cards[0].offsetWidth + 20; // card width + gap
+    const totalCards = cards.length;
+    let isTransitioning = false;
+
     function moveSlide(direction) {
-        const totalCards = cards.length;
-        currentIndex += direction;
-        slideList.style.transition = 'transform 0.3s ease-in-out';
+        if (isTransitioning) return;
+        isTransitioning = true;
 
-        if (direction > 0) {
-            // Moving forward
-            slideList.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+        position += direction * cardWidth;
+        const maxPosition = totalCards * cardWidth;
 
-            // If we've reached the cloned set
-            if (currentIndex >= totalCards) {
-                setTimeout(() => {
-                    slideList.style.transition = 'none';
-                    currentIndex = 0;
-                    slideList.style.transform = `translateX(0)`;
-                }, 300); // Wait for transition to complete
-            }
-        } else {
-            // Moving backward
-            if (currentIndex < 0) {
-                currentIndex = totalCards - 1;
+        // Apply smooth transition
+        slideList.style.transition = 'transform 0.5s ease-in-out';
+        slideList.style.transform = `translateX(-${position}px)`;
+
+        // Reset position when reaching the end or beginning
+        if (position >= maxPosition) {
+            setTimeout(() => {
                 slideList.style.transition = 'none';
-                slideList.style.transform = `translateX(-${(totalCards) * cardWidth}px)`;
-                setTimeout(() => {
-                    slideList.style.transition = 'transform 0.3s ease-in-out';
-                    slideList.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
-                }, 10);
-            } else {
-                slideList.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
-            }
+                position = 0;
+                slideList.style.transform = `translateX(0)`;
+                isTransitioning = false;
+            }, 500);
+        } else if (position < 0) {
+            setTimeout(() => {
+                slideList.style.transition = 'none';
+                position = maxPosition - cardWidth;
+                slideList.style.transform = `translateX(-${position}px)`;
+                isTransitioning = false;
+            }, 500);
+        } else {
+            setTimeout(() => {
+                isTransitioning = false;
+            }, 500);
         }
     }
 
-    // Make title clickable
-    document.querySelector('.section-header h2').addEventListener('click', function() {
-        window.location.href = '/browse';
+    // Button handlers
+    nextButton.addEventListener('click', () => {
+        if (!isTransitioning) moveSlide(1);
     });
 
-    // Auto slide every 5 seconds
-    setInterval(() => moveSlide(1), 5000);
+    prevButton.addEventListener('click', () => {
+        if (!isTransitioning) moveSlide(-1);
+    });
 
-    // Add event listeners for the arrows
-    document.querySelector('.prev').addEventListener('click', () => moveSlide(-1));
-    document.querySelector('.next').addEventListener('click', () => moveSlide(1));
+    // Auto slide
+    let autoSlideInterval = setInterval(() => moveSlide(1), 5000);
+
+    // Pause on hover
+    slideList.addEventListener('mouseenter', () => {
+        clearInterval(autoSlideInterval);
+    });
+
+    slideList.addEventListener('mouseleave', () => {
+        autoSlideInterval = setInterval(() => moveSlide(1), 5000);
+    });
 });
 </script>
 {% endblock %}

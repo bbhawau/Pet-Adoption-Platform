@@ -567,27 +567,32 @@ body::-webkit-scrollbar {
 
 .pets-slideshow {
   position: relative;
-  max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
+  max-width: 1200px;
   overflow: hidden;
-  padding: 0 20px;
+  padding: 0 40px;
 }
 
 .pets-list {
-  display: flex;
-  gap: 20px;
-  transition: transform 0.3s ease-in-out;
+    display: flex;
+    gap: 20px;
+    transition: transform 0.5s ease-in-out;
+    width: max-content; /* Important: allows the container to be as wide as needed */
 }
 
 .pet-card {
   flex: 0 0 300px;
-  background: white;
+  padding: 0 ;
+  margin-right: 0;
+  background: var(--white-color);
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   height: 350px; /* Set fixed height for the card */
   display: flex;
   flex-direction: column;
+  transition: transform 0.3s ease;
 }
 .pet-card:hover {
   transform: translateY(-10px);
@@ -596,7 +601,7 @@ body::-webkit-scrollbar {
 
 .pet-card img {
   width: 100%;
-  height: 300px;
+  height: 250px;
   object-fit: cover;
   object-position: center;
   flex: 1; /* Allow image to take available space */
@@ -605,25 +610,29 @@ body::-webkit-scrollbar {
 .pet-name {
   font-size: 1.2rem;
   color: var(--text-color);
-  margin: 0.5rem 0 0.25rem;
   text-align: center;
   padding: 10px;
   flex-shrink: 0; /* Prevent name from shrinking */
+  margin-top: 10px;
+  font-weight: bold;
+
 }
+
 .pet-name:hover {
   color: var(--accent-color);
 }
 
-.prev,
-.next {
+.prev, .next {
   cursor: pointer;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  padding: 16px;
   width: 40px;
   height: 40px;
   background: var(--accent-color);
   color: white;
+  border: none;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -631,17 +640,13 @@ body::-webkit-scrollbar {
   text-decoration: none;
   font-size: 1.5rem;
   transition: background-color 0.3s ease;
+  z-index: 2;
 }
 
-.prev {
-  left: 10px;
-}
-.next {
-  right: 10px;
-}
+.prev {left: 10px;}
+.next {right: 10px;}
 
-.prev:hover,
-.next:hover {
+.prev:hover, .next:hover {
   background: var(--text-color);
 }
 
@@ -655,11 +660,13 @@ body::-webkit-scrollbar {
   }
 }
 .team {
+  color: var(--text-color);
   padding: 40px;
   text-align: center;
 }
 
 .team-members {
+  color: var(--white-color);
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -668,7 +675,7 @@ body::-webkit-scrollbar {
 }
 
 .team-member {
-  background-color: #e7e1d5;
+  background-color: var(--accent-color);
   border-radius: 50%;
   width: 90px;
   height: 90px;
@@ -677,4 +684,13 @@ body::-webkit-scrollbar {
   align-items: center;
   font-weight: bold;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.row {
+    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer and Edge */
+}
+
+.row::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari and Opera */
 }
