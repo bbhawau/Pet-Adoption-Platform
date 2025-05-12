@@ -19,11 +19,20 @@ def browse_pets():
     return render_template("browse_pets.html", animal_groups=grouped_animals)
 
 
-@views.route('/adopt/<int:animal_id>')
+@views.route('/adopt/<int:animal_id>', methods=['GET', 'POST'])
 @login_required
 def adopt(animal_id):
     animal = Animal.query.get_or_404(animal_id)
-    return render_template("adopt.html", animal=animal)
+
+    if request.method == 'POST':
+        phone = request.form.get('phone')
+        message = request.form.get('message')
+
+        flash(f"Thank you {current_user.name}, your request to adopt {animal.name} has been received!", "success")
+        return redirect(url_for('views.browse_pets'))
+
+    return render_template('adopt.html', animal=animal)
+
 
 
 @views.route('/how')

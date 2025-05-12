@@ -1,20 +1,56 @@
 {% extends "base.html" %}
 {% block title %}Adopt {{ animal.name }}{% endblock %}
+
 {% block content %}
-<h2>Adopt {{ animal.name }}</h2>
-<form method="POST" action="{{ url_for('views.adopt', animal_id=animal.id) }}">
-  <div class="mb-3">
-    <label>Name</label>
-    <input type="text" class="form-control" value="{{ animal.name }}" readonly>
+<div class="container mt-4 adoption-form">
+  <h2 class="mb-4 adopt-animal">Adopt {{ animal.name }}</h2>
+  <div class="card shadow rounded-4">
+    <div class="card-body">
+      <form method="POST" action="{{ url_for('views.adopt', animal_id=animal.id) }}">
+        <!-- User Info -->
+        <div class="mb-3">
+          <label class="form-label">Your Name</label>
+          <input type="text" class="form-control form-control-lg rounded" value="{{ current_user.name }}" readonly>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-control form-control-lg rounded" value="{{ current_user.email }}" readonly>
+        </div>
+        <!-- Animal Info -->
+        <div class="mb-3">
+          <label class="form-label">Animal Name</label>
+          <input type="text" class="form-control form-control-lg rounded" value="{{ animal.name }}" readonly>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Breed</label>
+          <input type="text" class="form-control form-control-lg rounded" value="{{ animal.breed }}" readonly>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Age</label>
+          <input type="text" class="form-control form-control-lg rounded" value="{{ animal.age }} years" readonly>
+        </div>
+
+        <hr>
+
+        <!-- Additional Fields -->
+        <div class="mb-3">
+          <label for="phone" class="form-label">Phone Number</label>
+          <input type="tel" class="form-control form-control-lg rounded" id="phone" name="phone" placeholder="e.g. 123-456-7890" required>
+        </div>
+        <div class="mb-3">
+          <label for="message" class="form-label">Address</label>
+          <textarea class="form-control form-control-lg rounded" id="message" name="message" rows="4"
+             required></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="message" class="form-label">Message</label>
+          <textarea class="form-control form-control-lg rounded" id="message" name="message" rows="4"
+            placeholder="Tell us why you want to adopt this pet..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-success btn-lg w-100 rounded-pill adopt-btn">Confirm Adoption</button>
+      </form>
+    </div>
   </div>
-  <div class="mb-3">
-    <label>Breed</label>
-    <input type="text" class="form-control" value="{{ animal.breed }}" readonly>
-  </div>
-  <div class="mb-3">
-    <label>Age</label>
-    <input type="text" class="form-control" value="{{ animal.age }} years" readonly>
-  </div>
-  <button type="submit" class="btn btn-success">Confirm Adoption</button>
-</form>
+</div>
 {% endblock %}
