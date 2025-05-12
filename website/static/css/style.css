@@ -175,6 +175,56 @@ body::-webkit-scrollbar {
 }
 
 /* browse pets styling */
+/* Make the pet groups horizontally scrollable */
+.pet-group {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+  scroll-snap-type: x mandatory;
+}
+
+.pet-card-wrapper {
+  flex: 0 0 auto;
+  width: 50%; /* Default 2 items per row on small screens */
+  min-width: 220px;
+  scroll-snap-align: start;
+}
+
+@media (min-width: 577px) {
+  .pet-card-wrapper {
+    width: 33%; /* 3 items per row on medium screens */
+  }
+}
+
+@media (min-width: 992px) {
+  .pet-card-wrapper {
+    width: 20%; /* 5 items per row on large screens */
+  }
+}
+
+/* Mobile-first search bar: stack vertically on small screens */
+@media (max-width: 576px) {
+  .search-wrapper {
+    flex-direction: column;
+  }
+}
+
+.search-input {
+  width: 100%;
+}
+
+/* Ensure the pet card container has proper spacing */
+.pet-card-wrapper {
+  margin-bottom: 1rem;
+}
+
+#noResultsMessage {
+  font-size: 1.2rem;
+  padding: 2rem;
+}
+.browse-pets-container {
+  margin-bottom: 50px;
+}
 .browse-pets-container h2 {
   color: var(--text-color);
 }
@@ -218,12 +268,35 @@ body::-webkit-scrollbar {
   outline: none !important;
 }
 
+/* adoption form styling */
+.adoption-form {
+  padding: 10px;
+  margin-bottom: 50px;
+}
+.adoption-form .adopt-animal {
+  color: var(--accent-color);
+}
+.adoption-form input {
+  border: var(--accent-color) 2px solid;
+}
 .adopt-btn {
+  /* for both buttons on browse pets and adoption form */
   background-color: var(--accent-color) !important;
   border: var(--accent-color) !important;
   color: var(--text-color) !important;
 }
-
+.adoption-form .form-label {
+  font-weight: 600; /* Make it semi-bold */
+  font-size: 1.1rem; /* Slightly larger text */
+  color: var(--text-color); /* Darker color for contrast */
+}
+.form-control:focus,
+textarea.form-control:focus {
+  border-color: var(--accent-color); /* Green border */
+  box-shadow: 0 0 0 0.2rem var(--accent-color); /* Soft green glow */
+  outline: none;
+}
+/* Browse pets styling end */
 /*How It Works Page*/
 
 .main-content {
