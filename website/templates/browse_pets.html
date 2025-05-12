@@ -3,12 +3,42 @@
 {% block content %}
 <div class="browse-pets-container">
 
+  <!-- Combined Search and Filter Row -->
+  <div class="d-flex align-items-center mb-4 w-100" style="gap: 0;">
+    <!-- Search bar with clear button -->
+    <div class="search-wrapper d-flex align-items-center gap-2" style="width: 80%;">
+      <input type="text" id="searchInput" class="form-control search-input" placeholder="Search for pets..."
+        onkeyup="searchPets()">
+      <button id="clearSearch" class="btn btn-outline-secondary" style="display: none;"
+        onclick="clearSearch()">✕</button>
+    </div>
 
-  <!-- Search bar with clear button -->
-  <div class="search-wrapper mb-4 d-flex align-items-center gap-2 px-3 py-2">
-    <input type="text" id="searchInput" class="form-control search-input" placeholder="Search for pets..."
-      onkeyup="searchPets()">
-    <button id="clearSearch" class="btn btn-outline-secondary" style="display: none;" onclick="clearSearch()">✕</button>
+    <!-- Unified Filter Button -->
+    <div class="filter-wrapper mb-4 px-3">
+      <div class="dropdown" style="width: 20%;">
+        <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="filterDropdown"
+          data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="bi bi-funnel-fill"></i>
+        </button>
+        <div class="dropdown-menu p-3" style="min-width: 250px;">
+          <strong class="dropdown-header">Filter by Group</strong>
+          <a class="dropdown-item" href="#" onclick="filterByGroup('All')">All</a>
+          {% for group in animal_groups.keys() %}
+          <a class="dropdown-item" href="#" onclick="filterByGroup('{{ group }}')">{{ group }}</a>
+          {% endfor %}
+
+          <div class="dropdown-divider"></div>
+          <strong class="dropdown-header">Sort by Age</strong>
+          <a class="dropdown-item" href="#" onclick="sortPets('age', 'asc')">Youngest First</a>
+          <a class="dropdown-item" href="#" onclick="sortPets('age', 'desc')">Oldest First</a>
+
+          <div class="dropdown-divider"></div>
+          <strong class="dropdown-header">Sort by Breed</strong>
+          <a class="dropdown-item" href="#" onclick="sortPets('breed', 'asc')">A to Z</a>
+          <a class="dropdown-item" href="#" onclick="sortPets('breed', 'desc')">Z to A</a>
+        </div>
+      </div>
+    </div>
   </div>
 
   <h2>Need a new friend? You've come to the right place</h2>
@@ -55,7 +85,7 @@
     // Show the "clear" button if there's text in the search bar
     clearSearchButton.style.display = searchInput.length > 0 ? 'block' : 'none';
 
-    const groups = document.querySelectorAll('.row');
+    const groups = document.querySelectorAll('.pet-group');
     let anyVisible = false;
 
     groups.forEach(group => {
@@ -101,7 +131,7 @@
     document.getElementById('clearSearch').style.display = 'none';
 
     // Get all pet groups and reset them
-    const groups = document.querySelectorAll('.row');
+    const groups = document.querySelectorAll('.pet-group');
 
     groups.forEach(group => {
       const cards = Array.from(group.getElementsByClassName('pet-card-wrapper'));
@@ -118,6 +148,96 @@
   }
 
 </script>
+
+<script>
+  // Current group filter state
+  let activeGroup = 'All';
+
+  function filterByGroup(group) {
+    activeGroup = group;
+    applyFilters();
+  }
+
+  function sortPets(key, order) {
+    const petGroups = document.querySelectorAll('.pet-group');
+
+    petGroups.forEach(group => {
+      const cards = Array.from(group.getElementsByClassName('pet-card-wrapper'));
+
+      const sorted = cards.sort((a, b) => {
+        let aVal = a.dataset[key].toLowerCase();
+        let bVal = b.dataset[key].toLowerCase();
+
+        // Convert age to number for numeric sorting
+        if (key === 'age') {
+          aVal = parseInt(aVal);
+          bVal = parseInt(bVal);
+        }
+
+        if (aVal < bVal) return order === 'asc' ? -1 : 1;
+        if (aVal > bVal) return order === 'asc' ? 1 : -1;
+        return 0;
+      });
+
+      // Re-append sorted cards
+      const container = group;
+      sorted.forEach(card => container.appendChild(card));
+    });
+  }
+
+  function applyFilters() {
+    const searchInput = document.getElementById('searchInput').value.toLowerCase();
+    const petGroups = document.querySelectorAll('.pet-group');
+    const allGroups = document.querySelectorAll('.group');
+    const noResultsMessage = document.getElementById('noResultsMessage');
+
+    let anyVisible = false;
+
+    petGroups.forEach((group, index) => {
+      const groupName = allGroups[index].textContent.trim();
+      const showGroup = activeGroup === 'All' || groupName === activeGroup;
+
+      const cards = Array.from(group.getElementsByClassName('pet-card-wrapper'));
+
+      let groupVisible = false;
+
+      cards.forEach(card => {
+        const name = card.dataset.name.toLowerCase();
+        const breed = card.dataset.breed.toLowerCase();
+        const age = card.dataset.age.toLowerCase();
+        const matchesSearch = name.includes(searchInput) || breed.includes(searchInput) || age.includes(searchInput);
+
+        const visible = showGroup && matchesSearch;
+        card.style.display = visible ? 'block' : 'none';
+        if (visible) groupVisible = true;
+      });
+
+      // Show or hide group heading and container
+      group.style.display = groupVisible ? 'flex' : 'none';
+      allGroups[index].style.display = groupVisible ? 'block' : 'none';
+
+      if (groupVisible) anyVisible = true;
+    });
+
+    document.querySelector('.petGroupsContainer').style.display = anyVisible ? 'block' : 'none';
+    noResultsMessage.style.display = anyVisible ? 'none' : 'block';
+  }
+
+  // Hook into search as well
+  document.getElementById('searchInput').addEventListener('input', applyFilters);
+
+  function clearSearch() {
+    document.getElementById('searchInput').value = '';
+    document.getElementById('clearSearch').style.display = 'none';
+    applyFilters();
+  }
+
+  // Show/hide clear button on typing
+  document.getElementById('searchInput').addEventListener('keyup', function () {
+    document.getElementById('clearSearch').style.display = this.value ? 'block' : 'none';
+  });
+</script>
+
 
 
 
