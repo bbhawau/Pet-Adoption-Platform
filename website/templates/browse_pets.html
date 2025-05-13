@@ -1,23 +1,44 @@
 {% extends "base.html" %} {% block title %}Browse Pets{% endblock %} {% block
 content %}
 <div class="browse-pets-container">
-  <!-- Search bar with clear button -->
-  <div class="search-wrapper mb-4 d-flex align-items-center gap-2 px-3 py-2">
-    <input
-      type="text"
-      id="searchInput"
-      class="form-control search-input"
-      placeholder="Search for pets..."
-      onkeyup="searchPets()"
-    />
-    <button
-      id="clearSearch"
-      class="btn btn-outline-secondary"
-      style="display: none"
-      onclick="clearSearch()"
-    >
-      ✕
-    </button>
+
+  <!-- Combined Search and Filter Row -->
+  <div class="d-flex align-items-center mb-4 w-100" style="gap: 0;">
+    <!-- Search bar with clear button -->
+    <div class="search-wrapper d-flex align-items-center gap-2" style="width: 80%;">
+      <input type="text" id="searchInput" class="form-control search-input" placeholder="Search for pets..."
+        onkeyup="searchPets()">
+      <button id="clearSearch" class="btn btn-outline-secondary" style="display: none;"
+        onclick="clearSearch()">✕</button>
+    </div>
+
+    <!-- Unified Filter Button -->
+    <div class="filter-wrapper mb-4 px-3">
+      <div class="dropdown" style="width: 20%;">
+        <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="filterDropdown"
+          data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="bi bi-funnel-fill"></i>
+        </button>
+        <div class="dropdown-menu p-3" style="min-width: 250px;">
+          <strong class="dropdown-header">Filter by Group</strong>
+          <a class="dropdown-item" href="#" onclick="filterByGroup('All')">All</a>
+          {% for group in animal_groups.keys() %}
+          <a class="dropdown-item" href="#" onclick="filterByGroup('{{ group }}')">{{ group }}</a>
+          {% endfor %}
+
+          <div class="dropdown-divider"></div>
+          <strong class="dropdown-header">Sort by Age</strong>
+          <a class="dropdown-item" href="#" onclick="sortPets('age', 'asc')">Youngest First</a>
+          <a class="dropdown-item" href="#" onclick="sortPets('age', 'desc')">Oldest First</a>
+
+          <div class="dropdown-divider"></div>
+          <strong class="dropdown-header">Sort by Breed</strong>
+          <a class="dropdown-item" href="#" onclick="sortPets('breed', 'asc')">A to Z</a>
+          <a class="dropdown-item" href="#" onclick="sortPets('breed', 'desc')">Z to A</a>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <h2>Need a new friend? You've come to the right place</h2>
@@ -85,7 +106,9 @@ content %}
     // Show the "clear" button if there's text in the search bar
     clearSearchButton.style.display = searchInput.length > 0 ? "block" : "none";
 
-    const groups = document.querySelectorAll(".row");
+
+    const groups = document.querySelectorAll('.pet-group');
+
     let anyVisible = false;
 
     groups.forEach((group) => {
@@ -137,7 +160,7 @@ content %}
     document.getElementById("clearSearch").style.display = "none";
 
     // Get all pet groups and reset them
-    const groups = document.querySelectorAll(".row");
+
 
     groups.forEach((group) => {
       const cards = Array.from(
@@ -156,4 +179,3 @@ content %}
   }
 </script>
 
-{% endblock %}
