@@ -1,5 +1,5 @@
 :root {
-  --sand-color: #f8e1c6;
+  --sand-color: #fff9f2;
   --text-color: #7a5c36;
   --accent-color: #c1caa1;
   --white-color: #ffffff;
@@ -345,13 +345,13 @@ textarea.form-control:focus {
 .step-text h3 {
   margin: 0.5rem 0;
   font-size: 1.25rem;
-  color: #000;
+  color: var(--footer-color);
   position: absolute;
 }
 
 .step-text p {
   font-size: 0.95rem;
-  color: #000;
+  color: var(--footer-color);
   position: absolute;
 }
 
@@ -434,7 +434,7 @@ textarea.form-control:focus {
   text-align: center;
   margin-top: 2rem;
   margin-bottom: 1rem;
-  color: #a08367;
+  color: var(--text-color);
 }
 
 .info-head h2 {
@@ -442,21 +442,21 @@ textarea.form-control:focus {
   font-size: 1.5rem;
   text-align: center;
   margin-bottom: 1rem;
-  color: #a08367;
+  color: var(--text-color);
 }
 
 .accordion-btn {
-  color: #444;
+  color: var(--footer-color);
   cursor: pointer;
   padding: 0.75rem 1rem;
   width: 100%;
-  border: none;
+  border: solid 1px var(--accent-color);
   text-align: left;
   outline: none;
   font-size: 1rem;
   border-radius: 6px;
   margin-bottom: 0.5rem;
-  background-color: #f9f9f9;
+  background-color: var(--sand-color);
   position: relative;
   transition: background-color 0.3s ease;
 }
