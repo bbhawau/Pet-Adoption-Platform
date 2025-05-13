@@ -1,410 +1,410 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %} {% block content%}
-  
-  <!-- Main Container -->
-  <section class="main">
-    <div class="container">
-      <div class="row align-items-center">
-        <!-- Image on the Left -->
-        <div class="col-md-6 img-txt image-side">
+
+<!-- Main Container -->
+<section class="main">
+  <div class="container">
+    <div class="row align-items-center">
+      <!-- Image on the Left -->
+      <div class="col-md-6 img-txt image-side">
+        <img
+          src="{{ url_for('static', filename='images/homepage-family.png') }}"
+          alt="Happy Family with Dog"
+        />
+      </div>
+
+      <!-- Text on the Right -->
+      <div class="col-md-6 img-txt text-side">
+        <h1>HAPPY PET,<br />HAPPY HOME!</h1>
+        <p>
+          Where Love and Paws meet
           <img
-            src="{{ url_for('static', filename='images/homepage-family.png') }}"
-            alt="Happy Family with Dog"
+            src="{{ url_for('static', filename='images/paw.png') }}"
+            alt="paw icon"
+            class="paw-icon"
           />
-        </div>
-  
-        <!-- Text on the Right -->
-        <div class="col-md-6 img-txt text-side">
-          <h1>HAPPY PET,<br />HAPPY HOME!</h1>
-          <p>
-            Where Love and Paws meet
-            <img
-              src="{{ url_for('static', filename='images/paw.png') }}"
-              alt="paw icon"
-              class="paw-icon"
-            />
-          </p>
-          {% if not current_user.is_authenticated %}
-          <a
-            href="#"
-            data-bs-toggle="modal"
-            data-bs-target="#signUpModal"
-            class="get-started-btn"
-          >
-            Get Started
-            <img
-              src="{{ url_for('static', filename='images/white paw.png') }}"
-              alt="paw icon"
-              class="paw-icon"
-            />
-          </a>
-          {% endif %}
-        </div>
+        </p>
+        {% if not current_user.is_authenticated %}
+        <a
+          href="#"
+          data-bs-toggle="modal"
+          data-bs-target="#signUpModal"
+          class="get-started-btn"
+        >
+          Get Started
+          <img
+            src="{{ url_for('static', filename='images/white paw.png') }}"
+            alt="paw icon"
+            class="paw-icon"
+          />
+        </a>
+        {% endif %}
       </div>
     </div>
-  </section>
-  
-  <!-- Pets Available for Adoption -->
-  <section class="pets-available">
-    <div class="section-header">
-      <h2>Pets available for adoption...</h2>
-    </div>
-    <div class="pets-slideshow">
-      <div class="pets-list">
-        <div class="pet-card">
-          <img
-            src="{{ url_for('static', filename='images/bengalcat.jpeg') }}"
-            alt="Bengal cat"
-          />
-          <p class="pet-name">Nala</p>
-        </div>
-        <div class="pet-card">
-          <img
-            src="{{ url_for('static', filename='images/jake.jpeg') }}"
-            alt="Husky"
-          />
-          <p class="pet-name">Jake</p>
-        </div>
-        <div class="pet-card">
-          <img
-            src="{{ url_for('static', filename='images/thor.jpeg') }}"
-            alt="eagle"
-          />
-          <p class="pet-name">Thor</p>
-        </div>
-        <div class="pet-card">
-          <img
-            src="{{ url_for('static', filename='images/biscuit.jpeg') }}"
-            alt="cat"
-          />
-          <p class="pet-name">Biscuit</p>
-        </div>
-        <div class="pet-card">
-          <img
-            src="{{ url_for('static', filename='images/grey cat.jpeg') }}"
-            alt="cat"
-          />
-          <p class="pet-name">Poseidon</p>
-        </div>
-        <div class="pet-card">
-          <img
-            src="{{ url_for('static', filename='images/rott.jpeg') }}"
-            alt="cow"
-          />
-          <p class="pet-name">Lily</p>
-        </div>
-        <div class="pet-card">
-          <img
-            src="{{ url_for('static', filename='images/klaus.jpeg') }}"
-            alt="cat"
-          />
-          <p class="pet-name">Klaus</p>
-        </div>
-        <div class="pet-card">
-          <img
-            src="{{ url_for('static', filename='images/Frame 10.png') }}"
-            alt="cow"
-          />
-          <p class="pet-name">Mika</p>
-        </div>
-  
-        <div class="pet-card">
-          <img
-            src="{{ url_for('static', filename='images/owl.png') }}"
-            alt="owl"
-          />
-          <p class="pet-name">Nala</p>
-        </div>
+  </div>
+</section>
+
+<!-- Pets Available for Adoption -->
+<section class="pets-available">
+  <div class="section-header">
+    <h2>Pets available for adoption...</h2>
+  </div>
+  <div class="pets-slideshow">
+    <div class="pets-list">
+      <div class="pet-card">
+        <img
+          src="{{ url_for('static', filename='images/bengalcat.jpeg') }}"
+          alt="Bengal cat"
+        />
+        <p class="pet-name">Nala</p>
       </div>
-      <!-- Left and right arrows -->
-      <a class="prev" onclick="moveSlide(-1)">&#10094;</a>
-      <a class="next" onclick="moveSlide(1)">&#10095;</a>
+      <div class="pet-card">
+        <img
+          src="{{ url_for('static', filename='images/jake.jpeg') }}"
+          alt="Husky"
+        />
+        <p class="pet-name">Jake</p>
+      </div>
+      <div class="pet-card">
+        <img
+          src="{{ url_for('static', filename='images/thor.jpeg') }}"
+          alt="eagle"
+        />
+        <p class="pet-name">Thor</p>
+      </div>
+      <div class="pet-card">
+        <img
+          src="{{ url_for('static', filename='images/biscuit.jpeg') }}"
+          alt="cat"
+        />
+        <p class="pet-name">Biscuit</p>
+      </div>
+      <div class="pet-card">
+        <img
+          src="{{ url_for('static', filename='images/grey cat.jpeg') }}"
+          alt="cat"
+        />
+        <p class="pet-name">Poseidon</p>
+      </div>
+      <div class="pet-card">
+        <img
+          src="{{ url_for('static', filename='images/rott.jpeg') }}"
+          alt="cow"
+        />
+        <p class="pet-name">Lily</p>
+      </div>
+      <div class="pet-card">
+        <img
+          src="{{ url_for('static', filename='images/klaus.jpeg') }}"
+          alt="cat"
+        />
+        <p class="pet-name">Klaus</p>
+      </div>
+      <div class="pet-card">
+        <img
+          src="{{ url_for('static', filename='images/Frame 10.png') }}"
+          alt="cow"
+        />
+        <p class="pet-name">Mika</p>
+      </div>
+
+      <div class="pet-card">
+        <img
+          src="{{ url_for('static', filename='images/owl.png') }}"
+          alt="owl"
+        />
+        <p class="pet-name">Nala</p>
+      </div>
     </div>
-  </section>
-  
-  <!-- Our Team Section -->
-  <section class="team">
-    <h2>Our team</h2>
-    <div class="team-members">
-      <div class="team-member">Adaure</div>
-      <div class="team-member">Hawau</div>
-      <div class="team-member">Rifqa</div>
-      <div class="team-member">Moria</div>
-      <div class="team-member">Doreen</div>
-    </div>
-    <p>Interested in joining our team? Click <a href="#">here</a></p>
-  </section>
-  
-  <!-- Sign Up Modal -->
-  <div
-    class="modal fade"
-    id="signUpModal"
-    tabindex="-1"
-    aria-labelledby="signUpModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-      <div class="modal-content">
-        <!-- Close Button with Background -->
-        <button
-          type="button"
-          class="btn-close position-absolute top-0 end-0 m-3 p-2 bg-light rounded-circle"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-          style="opacity: 1"
-        ></button>
-  
-        <div class="row g-0 flex-column flex-md-row">
-          <!-- Left Side (Form) -->
-          <div class="col-md-6 d-flex align-items-center justify-content-center">
-            <div class="card-body p-4 w-100" style="max-width: 400px">
-              <h2 class="card-title text-center mb-4" style="font-weight: 600">
+    <!-- Left and right arrows -->
+    <a class="prev" onclick="moveSlide(-1)">&#10094;</a>
+    <a class="next" onclick="moveSlide(1)">&#10095;</a>
+  </div>
+</section>
+
+<!-- Our Team Section -->
+<section class="team">
+  <h2>Our team</h2>
+  <div class="team-members">
+    <div class="team-member">Adaure</div>
+    <div class="team-member">Hawau</div>
+    <div class="team-member">Rifqa</div>
+    <div class="team-member">Moria</div>
+    <div class="team-member">Doreen</div>
+  </div>
+  <p>Interested in joining our team? Click <a href="#">here</a></p>
+</section>
+
+<!-- Sign Up Modal -->
+<div
+  class="modal fade"
+  id="signUpModal"
+  tabindex="-1"
+  aria-labelledby="signUpModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <!-- Close Button with Background -->
+      <button
+        type="button"
+        class="btn-close position-absolute top-0 end-0 m-3 p-2 bg-light rounded-circle"
+        data-bs-dismiss="modal"
+        aria-label="Close"
+        style="opacity: 1"
+      ></button>
+
+      <div class="row g-0 flex-column flex-md-row">
+        <!-- Left Side (Form) -->
+        <div class="col-md-6 d-flex align-items-center justify-content-center">
+          <div class="card-body p-4 w-100" style="max-width: 400px">
+            <h1 class="card-title text-center mb-4" style="font-weight: 600">
+              Get Started
+            </h1>
+            <form method="POST" action="{{ url_for('auth.sign_up') }}">
+              <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input
+                  type="text"
+                  class="form-control rounded-pill"
+                  id="name"
+                  name="name"
+                  placeholder="Enter your name"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input
+                  type="email"
+                  class="form-control rounded-pill"
+                  id="email"
+                  name="email"
+                  placeholder="Enter your email"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="password1" class="form-label">Password</label>
+                <input
+                  type="password"
+                  class="form-control rounded-pill"
+                  id="password1"
+                  name="password1"
+                  placeholder="Enter password"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="password2" class="form-label"
+                  >Confirm Password</label
+                >
+                <input
+                  type="password"
+                  class="form-control rounded-pill"
+                  id="password2"
+                  name="password2"
+                  placeholder="Confirm password"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn custom-btn w-100">
                 Sign Up
-              </h2>
-              <form method="POST" action="{{ url_for('auth.sign_up') }}">
-                <div class="mb-3">
-                  <label for="name" class="form-label">Name</label>
-                  <input
-                    type="text"
-                    class="form-control rounded-pill"
-                    id="name"
-                    name="name"
-                    placeholder="Enter your name"
-                    required
-                  />
-                </div>
-                <div class="mb-3">
-                  <label for="email" class="form-label">Email</label>
-                  <input
-                    type="email"
-                    class="form-control rounded-pill"
-                    id="email"
-                    name="email"
-                    placeholder="Enter your email"
-                    required
-                  />
-                </div>
-                <div class="mb-3">
-                  <label for="password1" class="form-label">Password</label>
-                  <input
-                    type="password"
-                    class="form-control rounded-pill"
-                    id="password1"
-                    name="password1"
-                    placeholder="Enter password"
-                    required
-                  />
-                </div>
-                <div class="mb-3">
-                  <label for="password2" class="form-label"
-                    >Confirm Password</label
-                  >
-                  <input
-                    type="password"
-                    class="form-control rounded-pill"
-                    id="password2"
-                    name="password2"
-                    placeholder="Confirm password"
-                    required
-                  />
-                </div>
-                <button type="submit" class="btn custom-btn w-100">
-                  Sign Up
-                </button>
-              </form>
-              <p class="mt-3 text-center">
-                Already have an account?
-                <a
-                  class="sign-link"
-                  href="#"
-                  data-bs-toggle="modal"
-                  data-bs-target="#loginModal"
-                  >Login</a
-                >
-              </p>
-            </div>
+              </button>
+            </form>
+            <p class="mt-3 text-center">
+              Already have an account?
+              <a
+                class="sign-link"
+                href="#"
+                data-bs-toggle="modal"
+                data-bs-target="#loginModal"
+                >Login</a
+              >
+            </p>
           </div>
-  
-          <!-- Right Side (Image) -->
-          <div class="col-md-6 d-none d-md-block">
-            <img
-              src="{{ url_for('static', filename='images/3 dogs.png') }}"
-              class="img-fluid w-100 h-100"
-              alt="Sign Up Image"
-              style="object-fit: cover"
-            />
+        </div>
+
+        <!-- Right Side (Image) -->
+        <div class="col-md-6 d-none d-md-block">
+          <img
+            src="{{ url_for('static', filename='images/3 dogs.png') }}"
+            class="img-fluid w-100 h-100"
+            alt="Sign Up Image"
+            style="object-fit: cover"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Login Modal -->
+<div
+  class="modal fade"
+  id="loginModal"
+  tabindex="-1"
+  aria-labelledby="loginModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <!-- Close Button with Background -->
+      <button
+        type="button"
+        class="btn-close position-absolute top-0 end-0 m-3 p-2 bg-light rounded-circle"
+        data-bs-dismiss="modal"
+        aria-label="Close"
+        style="opacity: 1"
+      ></button>
+
+      <div class="row g-0">
+        <!-- Left Side (Image) -->
+        <div class="col-md-6 d-none d-md-block">
+          <img
+            src="{{ url_for('static', filename='images/login cat.jpg') }}"
+            class="img-fluid w-100 h-100"
+            alt="Login Image"
+            style="object-fit: cover"
+          />
+        </div>
+
+        <!-- Right Side (Form) -->
+        <div class="col-md-6 d-flex align-items-center justify-content-center">
+          <div class="card-body p-4 w-100" style="max-width: 400px">
+            <h1 class="card-title text-center mb-4" style="font-weight: 600">
+              Welcome Back!
+            </h1>
+            <form method="POST" action="{{ url_for('auth.login') }}">
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input
+                  type="email"
+                  class="form-control rounded-pill"
+                  id="email"
+                  name="email"
+                  placeholder="Enter your email"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input
+                  type="password"
+                  class="form-control rounded-pill"
+                  id="password"
+                  name="password"
+                  placeholder="Enter password"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn custom-btn w-100">Login</button>
+            </form>
+            <p class="mt-3 text-center">
+              Don't have an account?
+              <a
+                class="sign-link"
+                href="#"
+                data-bs-toggle="modal"
+                data-bs-target="#signUpModal"
+                >Sign Up</a
+              >
+            </p>
           </div>
         </div>
       </div>
     </div>
   </div>
-  
-  <!-- Login Modal -->
-  <div
-    class="modal fade"
-    id="loginModal"
-    tabindex="-1"
-    aria-labelledby="loginModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-      <div class="modal-content">
-        <!-- Close Button with Background -->
-        <button
-          type="button"
-          class="btn-close position-absolute top-0 end-0 m-3 p-2 bg-light rounded-circle"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-          style="opacity: 1"
-        ></button>
-  
-        <div class="row g-0">
-          <!-- Left Side (Image) -->
-          <div class="col-md-6 d-none d-md-block">
-            <img
-              src="{{ url_for('static', filename='images/login cat.jpg') }}"
-              class="img-fluid w-100 h-100"
-              alt="Login Image"
-              style="object-fit: cover"
-            />
-          </div>
-  
-          <!-- Right Side (Form) -->
-          <div class="col-md-6 d-flex align-items-center justify-content-center">
-            <div class="card-body p-4 w-100" style="max-width: 400px">
-              <h2 class="card-title text-center mb-4" style="font-weight: 600">
-                Login
-              </h2>
-              <form method="POST" action="{{ url_for('auth.login') }}">
-                <div class="mb-3">
-                  <label for="email" class="form-label">Email</label>
-                  <input
-                    type="email"
-                    class="form-control rounded-pill"
-                    id="email"
-                    name="email"
-                    placeholder="Enter your email"
-                    required
-                  />
-                </div>
-                <div class="mb-3">
-                  <label for="password" class="form-label">Password</label>
-                  <input
-                    type="password"
-                    class="form-control rounded-pill"
-                    id="password"
-                    name="password"
-                    placeholder="Enter password"
-                    required
-                  />
-                </div>
-                <button type="submit" class="btn custom-btn w-100">Login</button>
-              </form>
-              <p class="mt-3 text-center">
-                Don't have an account?
-                <a
-                  class="sign-link"
-                  href="#"
-                  data-bs-toggle="modal"
-                  data-bs-target="#signUpModal"
-                  >Sign Up</a
-                >
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <!-- Conditional Script for Modal -->
-  {% if show_signup_modal %}
-  <script>
-    window.addEventListener("DOMContentLoaded", function () {
-      const modal = new bootstrap.Modal(document.getElementById("signUpModal"));
-      modal.show();
+</div>
+
+<!-- Conditional Script for Modal -->
+{% if show_signup_modal %}
+<script>
+  window.addEventListener("DOMContentLoaded", function () {
+    const modal = new bootstrap.Modal(document.getElementById("signUpModal"));
+    modal.show();
+  });
+</script>
+{% elif show_login_modal %}
+<script>
+  window.addEventListener("DOMContentLoaded", function () {
+    const modal = new bootstrap.Modal(document.getElementById("loginModal"));
+    modal.show();
+  });
+</script>
+{% endif %}
+
+<!-- Home page script -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const slideList = document.querySelector(".pets-list");
+    const cards = document.querySelectorAll(".pet-card");
+    const cardWidth = cards[0].offsetWidth + 20; // card width + gap
+    let currentIndex = 0;
+
+    // Clone the original cards and append them to create the infinite effect
+    cards.forEach((card) => {
+      const clone = card.cloneNode(true);
+      slideList.appendChild(clone);
     });
-  </script>
-  {% elif show_login_modal %}
-  <script>
-    window.addEventListener("DOMContentLoaded", function () {
-      const modal = new bootstrap.Modal(document.getElementById("loginModal"));
-      modal.show();
-    });
-  </script>
-  {% endif %}
-  
-  <!-- Home page script -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const slideList = document.querySelector(".pets-list");
-      const cards = document.querySelectorAll(".pet-card");
-      const cardWidth = cards[0].offsetWidth + 20; // card width + gap
-      let currentIndex = 0;
-  
-      // Clone the original cards and append them to create the infinite effect
-      cards.forEach((card) => {
-        const clone = card.cloneNode(true);
-        slideList.appendChild(clone);
-      });
-  
-      function moveSlide(direction) {
-        const totalCards = cards.length;
-        currentIndex += direction;
-        slideList.style.transition = "transform 0.3s ease-in-out";
-  
-        if (direction > 0) {
-          // Moving forward
-          slideList.style.transform = `translateX(-${
-            currentIndex * cardWidth
-          }px)`;
-  
-          // If we've reached the cloned set
-          if (currentIndex >= totalCards) {
-            setTimeout(() => {
-              slideList.style.transition = "none";
-              currentIndex = 0;
-              slideList.style.transform = `translateX(0)`;
-            }, 300); // Wait for transition to complete
-          }
-        } else {
-          // Moving backward
-          if (currentIndex < 0) {
-            currentIndex = totalCards - 1;
+
+    function moveSlide(direction) {
+      const totalCards = cards.length;
+      currentIndex += direction;
+      slideList.style.transition = "transform 0.3s ease-in-out";
+
+      if (direction > 0) {
+        // Moving forward
+        slideList.style.transform = `translateX(-${
+          currentIndex * cardWidth
+        }px)`;
+
+        // If we've reached the cloned set
+        if (currentIndex >= totalCards) {
+          setTimeout(() => {
             slideList.style.transition = "none";
-            slideList.style.transform = `translateX(-${
-              totalCards * cardWidth
-            }px)`;
-            setTimeout(() => {
-              slideList.style.transition = "transform 0.3s ease-in-out";
-              slideList.style.transform = `translateX(-${
-                currentIndex * cardWidth
-              }px)`;
-            }, 10);
-          } else {
+            currentIndex = 0;
+            slideList.style.transform = `translateX(0)`;
+          }, 300); // Wait for transition to complete
+        }
+      } else {
+        // Moving backward
+        if (currentIndex < 0) {
+          currentIndex = totalCards - 1;
+          slideList.style.transition = "none";
+          slideList.style.transform = `translateX(-${
+            totalCards * cardWidth
+          }px)`;
+          setTimeout(() => {
+            slideList.style.transition = "transform 0.3s ease-in-out";
             slideList.style.transform = `translateX(-${
               currentIndex * cardWidth
             }px)`;
-          }
+          }, 10);
+        } else {
+          slideList.style.transform = `translateX(-${
+            currentIndex * cardWidth
+          }px)`;
         }
       }
-  
-      // Make title clickable
-      document
-        .querySelector(".section-header h2")
-        .addEventListener("click", function () {
-          window.location.href = "/browse";
-        });
-  
-      // Auto slide every 5 seconds
-      setInterval(() => moveSlide(1), 5000);
-  
-      // Add event listeners for the arrows
-      document
-        .querySelector(".prev")
-        .addEventListener("click", () => moveSlide(-1));
-      document
-        .querySelector(".next")
-        .addEventListener("click", () => moveSlide(1));
-    });
-  </script>
-  {% endblock %}
+    }
+
+    // Make title clickable
+    document
+      .querySelector(".section-header h2")
+      .addEventListener("click", function () {
+        window.location.href = "/browse";
+      });
+
+    // Auto slide every 5 seconds
+    setInterval(() => moveSlide(1), 5000);
+
+    // Add event listeners for the arrows
+    document
+      .querySelector(".prev")
+      .addEventListener("click", () => moveSlide(-1));
+    document
+      .querySelector(".next")
+      .addEventListener("click", () => moveSlide(1));
+  });
+</script>
+{% endblock %}
