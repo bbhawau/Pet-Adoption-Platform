@@ -31,7 +31,7 @@
 <div class="container mt-4">
   {% for group, animals in animal_groups.items() %}
     <h3 class="mb-3 group">{{ group }}</h3>
-    <div class="row flex-nowrap overflow-auto gap-3 mb-5 d-sm-flex d-md-flex d-lg-flex" id="group-{{ group }}">
+    <div class="pet-group-container mb-5" id="group-{{ group }}">
       {% for animal in animals %}
         <div class="col-8 col-sm-6 col-md-4 col-lg-3 col-xl-2 pet-card-wrapper" data-name="{{ animal.name }}" data-breed="{{ animal.breed }}" data-age="{{ animal.age }}">
           <div class="card pet-card h-100" style="border-radius: 1rem; overflow: hidden;">
