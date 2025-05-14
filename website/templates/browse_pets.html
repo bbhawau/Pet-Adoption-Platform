@@ -4,12 +4,29 @@
 <div class="browse-pets-container">
   
 
-  <!-- Search bar with clear button -->
-  <div class="search-wrapper mb-4 d-flex align-items-center gap-2 px-3 py-2">
-    <input type="text" id="searchInput" class="form-control search-input" placeholder="Search for pets..." onkeyup="searchPets()">
-    <button id="clearSearch" class="btn btn-outline-secondary" style="display: none;" onclick="clearSearch()">✕</button>
+ <!-- Search bar with inline filter dropdown -->
+<div class="search-wrapper mb-4 d-flex align-items-center gap-2 px-3 py-2">
+  <input type="text" id="searchInput" class="form-control search-input" placeholder="Search for pets..." onkeyup="searchPets()">
+  <button id="clearSearch" class="btn btn-outline-secondary" style="display: none;" onclick="clearSearch()">✕</button>
+
+  <!-- Filter Dropdown with Icon -->
+  <div class="dropdown">
+    <a class="text-decoration-none text-muted" href="#" role="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-funnel-fill fs-4"></i>
+    </a>
+    <div class="dropdown-menu dropdown-menu-end p-3 shadow" style="min-width: 250px;">
+      <div class="mb-3">
+        <label for="breedFilter" class="form-label mb-1">Breed</label>
+        <input type="text" class="form-control" id="breedFilter" placeholder="e.g., Labrador" oninput="searchPets()">
+      </div>
+      <div>
+        <label for="ageFilter" class="form-label mb-1">Age (years)</label>
+        <input type="number" class="form-control" id="ageFilter" placeholder="e.g., 2" min="0" oninput="searchPets()">
+      </div>
+    </div>
   </div>
-  
+</div>
+
 <h2>Need a new friend? You've come to the right place</h2>
 <div class="container mt-4">
   {% for group, animals in animal_groups.items() %}
@@ -33,6 +50,9 @@
     </div>
   {% endfor %}
 </div>
+<div id="noResultsMessage" class="text-center text-muted my-4" style="display: none;">
+  <h5>No pets found. Try adjusting your search or filters.</h5>
+</div>
 
 
 </div>
@@ -41,61 +61,73 @@
 <script>
   function searchPets() {
     const searchInput = document.getElementById('searchInput').value.toLowerCase();
+    const breedFilter = document.getElementById('breedFilter').value.toLowerCase();
+    const ageFilter = document.getElementById('ageFilter').value;
     const clearSearchButton = document.getElementById('clearSearch');
-
-    // Show the "clear" button if there's text in the search bar
-    if (searchInput.length > 0) {
-      clearSearchButton.style.display = 'block';
-    } else {
-      clearSearchButton.style.display = 'none';
-    }
-
-    // Get all pet groups
-    const groups = document.querySelectorAll('.row');
-
-    groups.forEach(group => {
-      const cards = Array.from(group.getElementsByClassName('pet-card-wrapper'));
-
-      // Filter the pet cards within each group
-      const filteredCards = cards.filter(card => {
+    const noResultsMessage = document.getElementById('noResultsMessage');
+  
+    clearSearchButton.style.display = searchInput || breedFilter || ageFilter ? 'block' : 'none';
+  
+    const groups = document.querySelectorAll('.container .group');
+    let anyVisible = false;
+  
+    groups.forEach(groupHeader => {
+      const groupName = groupHeader.textContent.trim();
+      const groupContainer = document.getElementById(`group-${groupName}`);
+      const cards = Array.from(groupContainer.getElementsByClassName('pet-card-wrapper'));
+  
+      let visibleCards = 0;
+  
+      cards.forEach(card => {
         const name = card.getAttribute('data-name').toLowerCase();
         const breed = card.getAttribute('data-breed').toLowerCase();
-        const age = card.getAttribute('data-age').toLowerCase();
-
-        // Show the card if the search term matches any of the card's attributes
-        return name.includes(searchInput) || breed.includes(searchInput) || age.includes(searchInput);
+        const age = card.getAttribute('data-age');
+  
+        const matchesSearch = !searchInput || name.includes(searchInput) || breed.includes(searchInput) || age.includes(searchInput);
+        const matchesBreed = !breedFilter || breed.includes(breedFilter);
+        const matchesAge = !ageFilter || parseInt(age) === parseInt(ageFilter);
+  
+        const visible = matchesSearch && matchesBreed && matchesAge;
+        card.style.display = visible ? 'block' : 'none';
+        if (visible) visibleCards++;
       });
-
-      // Hide all the cards first
-      cards.forEach(card => {
-        card.style.display = 'none';
-      });
-
-      // Show the filtered cards
-      filteredCards.forEach(card => {
-        card.style.display = 'block';
-      });
+  
+      // Show or hide the entire group based on visible cards
+      const showGroup = visibleCards > 0;
+      groupHeader.style.display = showGroup ? 'block' : 'none';
+      groupContainer.style.display = showGroup ? 'flex' : 'none';
+  
+      if (showGroup) anyVisible = true;
     });
+  
+    // Show/hide "No results found" message
+    noResultsMessage.style.display = anyVisible ? 'none' : 'block';
   }
-
+  
+  
   function clearSearch() {
-    // Clear the search input and hide the "clear" button
     document.getElementById('searchInput').value = '';
+    document.getElementById('breedFilter').value = '';
+    document.getElementById('ageFilter').value = '';
     document.getElementById('clearSearch').style.display = 'none';
-
-    // Get all pet groups
-    const groups = document.querySelectorAll('.row');
-
-    groups.forEach(group => {
-      const cards = Array.from(group.getElementsByClassName('pet-card-wrapper'));
-
-      // Show all cards and reset visibility
-      cards.forEach(card => {
-        card.style.display = 'block';
-      });
+    document.getElementById('noResultsMessage').style.display = 'none';
+  
+    const groups = document.querySelectorAll('.container .group');
+  
+    groups.forEach(groupHeader => {
+      const groupName = groupHeader.textContent.trim();
+      const groupContainer = document.getElementById(`group-${groupName}`);
+      const cards = Array.from(groupContainer.getElementsByClassName('pet-card-wrapper'));
+  
+      cards.forEach(card => card.style.display = 'block');
+      groupHeader.style.display = 'block';
+      groupContainer.style.display = 'flex';
     });
   }
+  
+  
 </script>
+
 
 
 
