@@ -176,36 +176,82 @@ body::-webkit-scrollbar {
 
 /* browse pets styling */
 /* Make the pet groups horizontally scrollable */
-.pet-group {
+.pet-group-container {
   display: flex;
+  flex-wrap: nowrap;
   overflow-x: auto;
   gap: 1rem;
   scroll-snap-type: x mandatory;
+  padding-bottom: 1rem;
+  -webkit-overflow-scrolling: touch;
 }
 
 .pet-card-wrapper {
   flex: 0 0 auto;
-  width: 50%; /* Default 2 items per row on small screens */
-  min-width: 220px;
   scroll-snap-align: start;
 }
 
-@media (min-width: 577px) {
-  .pet-card-wrapper {
-    width: 33%; /* 3 items per row on medium screens */
-  }
-}
-
-@media (min-width: 992px) {
-  .pet-card-wrapper {
-    width: 20%; /* 5 items per row on large screens */
-  }
-}
-
-/* Mobile-first search bar: stack vertically on small screens */
+/* Extra small devices (phones) */
 @media (max-width: 576px) {
-  .search-wrapper {
-    flex-direction: column;
+  .pet-card-wrapper {
+    width: 70%;
+    max-width: 240px;
+  }
+
+  .pet-card {
+    height: 260px;
+  }
+
+  .pet-card img {
+    height: 140px;
+    object-fit: cover;
+  }
+}
+
+/* Small devices (small tablets) */
+@media (min-width: 577px) and (max-width: 768px) {
+  .pet-card-wrapper {
+    width: 55%;
+    max-width: 220px;
+  }
+
+  .pet-card {
+    height: 280px;
+  }
+
+  .pet-card img {
+    height: 150px;
+  }
+}
+
+/* Medium devices (tablets) */
+@media (min-width: 769px) and (max-width: 992px) {
+  .pet-card-wrapper {
+    width: 40%;
+    max-width: 230px;
+  }
+
+  .pet-card {
+    height: 300px;
+  }
+
+  .pet-card img {
+    height: 160px;
+  }
+}
+
+/* Large devices */
+@media (min-width: 993px) {
+  .pet-card-wrapper {
+    width: 220px;
+  }
+
+  .pet-card {
+    height: 320px;
+  }
+
+  .pet-card img {
+    height: 170px;
   }
 }
 
